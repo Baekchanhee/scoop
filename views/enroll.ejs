@@ -5,6 +5,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
 
+<style>
+.btn-gradient {
+   margin: 5px;
+}
+
+.color .blue   {background: #6698cb;}
+.color .green  {background: #82c8a0;}
+</style>
+
 <title>계좌 인증 페이지</title> 
 
 </head>
@@ -13,12 +22,10 @@
         <input type="hidden" id="accessToken" >
         <input type="hidden" id="useseqnum" >        
        
-        <img src="https://i.imgur.com/bQmweWw.jpg" style="max-width:100%; height:auto;">
+        <img src="https://i.imgur.com/8S3ulMe.jpg" style="max-width:100%; height:auto;">
         </div>
-        <button type="button" id="authBtn"><a class="button button-3d button-m button-circle shadow-small border-green1-dark bg-green1-light">계좌인증</a></button>
-        <p id="authCheck" style="display:none;">계좌 인증 완료 되었습니다!!</p>
-        <button type="button" id="joinBtn"><a class="button button-3d button-m button-circle shadow-small border-green1-dark bg-green1-light">등록완료</a></button>
-
+        <button type="button" id="authBtn"><a class="btn-gradient blue">계좌인증</a></button>
+        <button type="button" id="joinBtn"><a class="btn-gradient green">등록완료</a></button>
         
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
