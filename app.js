@@ -273,7 +273,7 @@ apiRouter.post('/transaction', function(req, res){
 					},
 					{
 						"simpleText": {
-							"text": "계좌등록이 되지 않았습니다."
+							"text": "등록된 계좌가 없습니다."
 						}
 					}
 				]
