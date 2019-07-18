@@ -39,7 +39,7 @@ app.use(express.static(__dirname+'/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//서버 test용 
+//서버 test용 한지은
 app.get('/', function(req, res) {
 	res.render('hello');
 });
