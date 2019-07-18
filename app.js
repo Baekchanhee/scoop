@@ -512,7 +512,6 @@ apiRouter.post('/visual', function(req, res){
 		var visual_url = result[9].visual_url;
 		
 	}
-
 	
 	
 	var responseBody = {
