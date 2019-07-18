@@ -537,7 +537,8 @@ apiRouter.get('/enroll', function(req, res, next){
 });
 
 apiRouter.get('/callback', function(req, res) {
-    var authcode = req.query.code;
+	var authcode = req.query.code;
+	console.log("callback 들어오니??");
 	console.log(req);
 	console.log(authcode);
 	
