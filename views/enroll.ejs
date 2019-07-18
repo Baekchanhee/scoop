@@ -39,6 +39,7 @@ window.onload=function(){
                 console.log(data.location);
                 var tmpwindow = window.open("about:blank");
                 tmpwindow.location = data.location;//추가
+                window.open('','_self').close();
             }
         })
     }   
