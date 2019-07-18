@@ -487,7 +487,7 @@ apiRouter.post('/rec', function(req, res){
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"}]'+'}';
 	   */
 
-	    var items = '{'+'"title": "'+result[i].apt_name+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
+	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "예상 가점 커트라인 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
 	    console.log(items)
             var it = JSON.parse(items);
