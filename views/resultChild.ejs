@@ -4,11 +4,18 @@
             <div id="usenum"><%=data.user_seq_no%></div>
     </body>
     <script>
+        function CloseWindow(){
+                    self.opener = self;
+                    window.close();
+                }
+
         opener.document.getElementById("accessToken").value = 
         document.getElementById("accessToken").textContent;
         opener.document.getElementById("useseqnum").value = 
         document.getElementById("usenum").textContent;
         var check = opener.document.getElementById("authCheck"); 
         check.style.display = 'block';
-        </script>
+
+        Closewindow();
+    </script>
 </html>
