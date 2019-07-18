@@ -351,6 +351,50 @@ apiRouter.post('/transaction', function(req, res){
 			console.log(balance);
 			var count = accessRequestResult.res_list.length;
 			console.log(count);
+
+			var responseBody = {
+				"version": "2.0",
+				"template": {
+					"outputs": [
+						{
+							"simpleText": {
+								"text": name+"님의 계좌등록이 완료되었습니다!\n"+"아래 내용을 확인해주세요.\n"
+								+"―――――――\n"+"✨ 은행명 :"+bank+"\n"+"✨ 계좌번호 :"+account+"\n"+"✨ 납입횟수 :"+count							
+								
+							}
+						},
+						{
+						"simpleText": {
+								"text": "❗️ 무주택기간 답변 가이드 ❗️\n\n"+"해당하는 기간에 맞는 숫자를 입력해주세요.\n"
+								+"――――――――――――\n"+"주택 소유 및 만 30세 미만, 미혼인 무주택자 → 0\n"
+								+"1년 미만인 경우 → 1\n"+"1년 이상~2년 이하인 경우 → 2\n"+"2년 이상~3년 미만 → 3\n"
+								+"3년 이상~4년 미만 → 4\n"+"4년 이상~5년 미만 → 5\n"+"5년 이상~6년 미만 → 6\n"
+								+"6년 이상~7년 미만 → 7\n"+"7년 이상~8년 미만 → 8\n"+"8년 이상~9년 미만 → 9\n"
+								+"9년 이상~10년 미만 → 10\n"+"10년 이상~11년 미만 → 11\n"+"11년 이상~12년 미만 → 12\n"
+								+"12년 이상~13년 미만 → 13\n"+"13년 이상~14년 미만 → 14\n"+"14년 이상~15년 미만 → 15\n"
+								+"15년 이상 → 16"
+											
+							}
+						}
+					],
+
+					"quickReplies": [
+						{
+							"label": "이전",
+							"action": "block",
+							"blockId": "5d29f4aeffa748000100365d"
+						},
+						{
+							"label": "청약가점계산하기",
+							"action": "block",
+							"blockId": "5d2c1cc2ffa7480001003c46"
+						}
+
+					]
+				}
+			};
+
+			/*
 			var responseBody = {
                 version: "2.0",
                 data: {
@@ -361,7 +405,7 @@ apiRouter.post('/transaction', function(req, res){
 						"balance": balance
 	        }
 
-        };
+        };*/
 
 	 res.status(200).send(responseBody);
 
