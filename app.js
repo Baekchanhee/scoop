@@ -123,7 +123,12 @@ apiRouter.post('/welcome', function(req, res){
 						  {
 							"action": "webLink",
 							"label": "계좌등록",
-							"webLinkUrl": "http://13.124.84.213/api/enroll"
+							"webLinkUrl": "http://13.124.84.213/api/enroll?id="+id
+						  },
+						  {
+							"action": "block",
+							"label": "시작하기",
+							"blockId": "5d2c1cc2ffa7480001003c46"
 						  },
 						  {
 							"action":  "block",
