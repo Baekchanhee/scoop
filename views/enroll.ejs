@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
 </head>
 <body>
-
+        <button type="button" id="authBtn" class="button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">인증받기</button>
 </body>
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
@@ -18,7 +18,7 @@
                     self.opener = self;
                     window.close();
                 }
-window.onload=function(){
+    $('#authBtn').click(function(){
     
     var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
     var redirect_uri = "http://13.124.84.213/api/enroll"; 
@@ -43,8 +43,7 @@ window.onload=function(){
                 console.log(data.location);
                 var tmpwindow = window.open("about:blank");
                 tmpwindow.location = data.location;//추가
-                setTimeout(function(){top.window.opener = top;top.window.open('','_parent','');top.window.close();})
-
+                CloseWindow();
 
 
 
