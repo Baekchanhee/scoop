@@ -6,14 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
 
 <style>
-.btn-gradient {
-   margin: 5px;
-}
-
-.color .blue   {background: #6698cb;}
-.color .green  {background: #82c8a0;}
-</style>
-
+        #authBtn{
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            margin-right:-4px;
+        }
+        #joinBtn{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;    
+            margin-left:-3px;
+        }
+        #btn_group button{
+            border: 1px solid skyblue;
+            background-color: rgba(0,0,0,0);
+            color: skyblue;
+            padding: 5px;
+        }
+    </style>
 <title>계좌 인증 페이지</title> 
 
 </head>
@@ -23,9 +32,11 @@
         <input type="hidden" id="useseqnum" >        
        
         <img src="https://i.imgur.com/8S3ulMe.jpg" style="max-width:100%; height:auto;">
+        
+        <div id="btn_group">
+        <button id="authBtn">계좌인증</button>
+        <button id="joinBtn">등록완료</button>
         </div>
-        <button type="button" id="authBtn"><a class="btn-gradient blue">계좌인증</a></button>
-        <button type="button" id="joinBtn"><a class="btn-gradient green">등록완료</a></button>
         
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
