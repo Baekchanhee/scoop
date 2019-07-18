@@ -571,42 +571,60 @@ apiRouter.post('/cutlinescore', function(req, res){
 	if(blid==blockId[0]){
 
 		var aptname = result[0].aptname;
+		var aptsco = result[0].score;
 
 	}else if(blid==blockId[1]){
 
 		var aptname = result[1].aptname;
+		var aptsco = result[1].score;
 
 	}else if(blid==blockId[2]){
 
 		var aptname = result[2].aptname;
+		var aptsco = result[2].score;
+
 
 	}else if(blid==blockId[3]){
 
 		var aptname = result[3].aptname;
+		var aptsco = result[3].score;
+
 
 	}else if(blid==blockId[4]){
 
 		var aptname = result[4].aptname;
+		var aptsco = result[4].score;
+
 
 	}else if(blid==blockId[5]){
 
 		var aptname = result[5].aptname;
+		var aptsco = result[5].score;
+
 
 	}else if(blid==blockId[6]){
 
 		var aptname = result[6].aptname;
+		var aptsco = result[6].score;
+
 
 	}else if(blid==blockId[7]){
 
 		var aptname = result[7].aptname;
+		var aptsco = result[7].score;
+
 
 	}else if(blid==blockId[8]){
 
 		var aptname = result[8].aptname;
+		var aptsco = result[8].score;
+
 
 	}else if(blid==blockId[9]){
 
 		var aptname = result[9].aptname;
+		var aptsco = result[9].score;
+
 		
 	}
 
@@ -618,7 +636,8 @@ apiRouter.post('/cutlinescore', function(req, res){
 		data: {
 			"score": score,
 			"name": name,
-			"aptname": aptname
+			"aptname": aptname,
+			"aptsco" : aptsco
 			
 					}	
 	  }		
@@ -667,7 +686,7 @@ apiRouter.post('/rec', function(req, res){
 	   */
 
 	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
-                '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "예상 가점 커트라인 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
+                '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "당첨 예상 점수 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
 	    console.log(items)
             var it = JSON.parse(items);
             il.push(it);
