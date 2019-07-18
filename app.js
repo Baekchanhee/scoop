@@ -548,6 +548,101 @@ apiRouter.post('/homeinfo', function(req, res){
 
 })
 
+apiRouter.post('/visual', function(req, res){
+	console.log(req.body);
+ 
+	console.log(req.body);
+	var bodyjson = req.body;
+	var params = bodyjson.action.params;
+ 
+	var id = bodyjson.userRequest.user.id;
+	var blid = bodyjson.userRequest.block.id;
+	var sql = "SELECT * FROM user WHERE kakaoId = ?";
+	
+
+    var result = connectionsyn.query(sql, [id]);
+    console.log(result);
+	var name = result[0].name;
+	var score = result[0].score;	
+
+	var sql = "SELECT * FROM selection WHERE kakaoId = ?"
+	var result = connectionsyn.query(sql, [id]);
+	console.log(result);
+	var brand = result[0].brand;
+	var district = result[0].district;
+	
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
+	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(result);
+	
+	var blockId = ['5d301a1affa748000122d24a', '5d301a6cffa748000122d24e', '5d301a76ffa748000122d250', '5d301a7fffa748000122d252', '5d301a86ffa748000122d254', '5d301b28b617ea0001da272e', '5d301b49ffa748000122d258', '5d301b50ffa748000122d25a', '5d301b5792690d00011f3b6f', '5d301b5fffa748000122d25f']
+	
+	if(blid==blockId[0]){
+
+		var visual_url = result[0].visual_url;
+
+	}else if(blid==blockId[1]){
+
+		var visual_url = result[1].visual_url;
+
+	}else if(blid==blockId[2]){
+
+		var visual_url = result[2].visual_url;
+
+	}else if(blid==blockId[3]){
+
+		var visual_url = result[3].visual_url;
+
+	}else if(blid==blockId[4]){
+
+		var visual_url = result[4].visual_url;
+
+	}else if(blid==blockId[5]){
+
+		var visual_url = result[5].visual_url;
+
+	}else if(blid==blockId[6]){
+
+		var visual_url = result[6].visual_url;
+
+	}else if(blid==blockId[7]){
+
+		var visual_url = result[7].visual_url;
+
+	}else if(blid==blockId[8]){
+
+		var visual_url = result[8].visual_url;
+
+	}else if(blid==blockId[9]){
+
+		var visual_url = result[9].visual_url;
+		
+	}
+	
+	
+	var responseBody = {
+		"version": "2.0",
+		"template": {
+		  "outputs": [
+			{
+			  "basicCard": {
+				"title": "상세분석 이미지",
+				"description": "위 이미지는 감성분석을 통한 결과를 시각화한 이미지입니다.",
+				"thumbnail": {
+				  "imageUrl": visual_url
+				}				
+			  }
+			}
+		  ]
+		}
+	  }
+
+	console.log(responseBody);
+	  res.status(200).send(responseBody);
+
+		
+})
+
 
 apiRouter.post('/cutlinescore', function(req, res){
 	console.log(req.body);
@@ -575,7 +670,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(result);
-	var aptname = result[0].aptname;
+
 	
 	var blockId = ['5d2f08f48192ac000132b492', '5d2f08fe8192ac000132b494', '5d2f09058192ac000132b497', '5d2f090c8192ac000132b499', '5d2f09778192ac000132b4a6', '5d2f097e8192ac000132b4a9', '5d2f09858192ac000132b4ac', '5d2f098c8192ac000132b4af', '5d2f09938192ac000132b4b2', '5d2f099a8192ac000132b4b5']
 	
