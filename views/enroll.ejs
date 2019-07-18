@@ -39,11 +39,11 @@ window.onload=function(){
         type : 'GET',
             success:function(data){
                 window.name ="parents";
-                console.error(data);
+                console.log(data);
                 console.log(data.location);
                 var tmpwindow = window.open("about:blank");
                 tmpwindow.location = data.location;//추가
-                CloseWindow();
+                setTimeout (window.close, 5000);
             }
         })
     }   
