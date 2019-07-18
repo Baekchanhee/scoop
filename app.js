@@ -133,7 +133,7 @@ apiRouter.post('/welcome', function(req, res){
 						  {
 							"action":  "block",
 							"label": "테스트용",
-							"blockId": "5d2c1cc2ffa7480001003c46"
+							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						]
 					  }
@@ -203,7 +203,7 @@ app.post('/join', function(req, res){
 })
 
 apiRouter.post('/testenroll', function(req,res){
-	
+
 	var bodyjson = req.body;
 	console.log(bodyjson);
 	var id = bodyjson.userRequest.user.id;
@@ -226,6 +226,197 @@ apiRouter.post('/testenroll', function(req,res){
 	res.status(200).send(responseBody);		 
 		
 })
+
+apiRouter.post('/transaction', function(req, res){
+
+	var bodyjson = req.body;
+	console.log(bodyjson);
+	var id = bodyjson.userRequest.user.id;
+	
+	var sql = "SELECT * FROM user WHERE kakaoId = ?";
+	
+	var result = connectionsyn.query(sql, [id]);
+	console.log(id);
+	console.log(result.length);
+	if(result.length == 0){
+		var responseBody = {
+			"version": "2.0",
+			"template": {
+				"outputs": [
+					
+					{
+					"basicCard": {
+											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
+						"thumbnail": {
+						  "imageUrl": "https://i.imgur.com/zDRSmHu.jpg"
+						},
+						"buttons": [
+						  {
+							"action": "webLink",
+							"label": "계좌등록",
+							"webLinkUrl": "http://13.124.84.213/api/enroll?id="+id
+						  },
+						  {
+							"action": "block",
+							"label": "시작하기",
+							"blockId": "5d2c1cc2ffa7480001003c46"
+						  },
+						  {
+							"action":  "block",
+							"label": "테스트용",
+							"blockId": "5d30356eb617ea0001da2890"
+						  }
+						
+						]
+						}
+					},
+					{
+						"simpleText": {
+							"text": "계좌등록이 되지 않았습니다."
+						}
+					}
+				]
+			}
+		};
+		res.status(200).send(responseBody);
+	}else{
+    console.log(result);
+	var accessToken = result[0].accessToken;
+	var useseqnum = result[0].useseqnum;	
+	
+	var user_seq_no = useseqnum;
+    var qs = "?user_seq_no="+user_seq_no;
+    var getAccountUrl = "https://testapi.open-platform.or.kr/user/me"+qs;
+    var option = {
+        method : "GET",
+        url : getAccountUrl,
+        headers : {
+            "Authorization" : "Bearer "+accessToken
+        }
+        
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+			var accessRequestResult = JSON.parse(body);
+			var name = accessRequestResult.user_name;			
+			console.log("name:"+name);
+			var finnum = accessRequestResult.res_list[0].fintech_use_num;
+			console.log("finnum:"+finnum);
+			var bank = accessRequestResult.res_list[0].bank_name;
+			console.log("bank:"+bank);
+			var account = accessRequestResult.res_list[0].account_num_masked;
+			console.log("account:"+account);
+			var sql = "UPDATE user SET name = '"+name+"', fintechnum = '"+finnum+"' where kakaoId = '"+id+"'";
+            connection.query(sql, function(err, result){
+				console.log("update:"+result);
+				console.log(err);
+		})
+
+		var fintech_use_num = finnum;
+    	var inquiry_type = "A";
+    	var from_date = "19190718";
+    	var to_date = "20190718";
+    	var sort_order = "D";
+    	var page_index = "1";
+    	var tran_dtime = "20190310101921";
+    	var befor_inquiry_trace_info = "123";
+		var list_tran_seqno = "0";
+		
+		var qs = "?fintech_use_num="+fintech_use_num+"&"
+        + "inquiry_type="+inquiry_type+"&"
+        + "from_date="+from_date+"&"
+        + "to_date="+to_date+"&"
+        + "sort_order="+sort_order+"&"
+        + "page_index="+page_index+"&"
+        + "tran_dtime="+tran_dtime+"&"
+        + "befor_inquiry_trace_info="+befor_inquiry_trace_info+"&"
+        + "list_tran_seqno="+list_tran_seqno+"&"
+    var getBalanceUrl = "https://testapi.open-platform.or.kr/v1.0/account/transaction_list"+qs;
+    var option = {
+        method : "GET",
+        url : getBalanceUrl,
+        headers : {
+            Authorization : "Bearer "+accessToken
+        }
+        
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+            var accessRequestResult = JSON.parse(body);
+			var balance = accessRequestResult.balance_amt;
+			//입금 count
+			console.log(balance);
+			var count = accessRequestResult.res_list.length;
+			console.log(count);
+
+			var responseBody = {
+				"version": "2.0",
+				"template": {
+					"outputs": [
+						{
+							"simpleText": {
+								"text": name+"님의 계좌등록이 완료되었습니다!\n"+"아래 내용을 확인해주세요.\n"
+								+"―――――――\n"+"✨ 은행명 :"+bank+"\n"+"✨ 계좌번호 :"+account+"\n"+"✨ 납입횟수 :"+count							
+								
+							}
+						},
+						{
+						"simpleText": {
+								"text": "❗️ 무주택기간 답변 가이드 ❗️\n\n"+"해당하는 기간에 맞는 숫자를 입력해주세요.\n"
+								+"――――――――――――\n"+"주택 소유 및 만 30세 미만, 미혼인 무주택자 → 0\n"
+								+"1년 미만인 경우 → 1\n"+"1년 이상~2년 이하인 경우 → 2\n"+"2년 이상~3년 미만 → 3\n"
+								+"3년 이상~4년 미만 → 4\n"+"4년 이상~5년 미만 → 5\n"+"5년 이상~6년 미만 → 6\n"
+								+"6년 이상~7년 미만 → 7\n"+"7년 이상~8년 미만 → 8\n"+"8년 이상~9년 미만 → 9\n"
+								+"9년 이상~10년 미만 → 10\n"+"10년 이상~11년 미만 → 11\n"+"11년 이상~12년 미만 → 12\n"
+								+"12년 이상~13년 미만 → 13\n"+"13년 이상~14년 미만 → 14\n"+"14년 이상~15년 미만 → 15\n"
+								+"15년 이상 → 16"
+											
+							}
+						}
+					],
+
+					"quickReplies": [
+						{
+							"label": "이전",
+							"action": "block",
+							"blockId": "5d29f4aeffa748000100365d"
+						},
+						{
+							"label": "청약가점계산하기",
+							"action": "block",
+							
+							"blockId": "5d2be86bb617ea000117907f"
+						}
+
+					]
+				}
+			};
+
+			/*
+			var responseBody = {
+                version: "2.0",
+                data: {
+						"name": name,
+						"bank": bank,
+						"account": account,
+						"count": count,
+						"balance": balance
+	        }
+
+        };*/
+
+	 res.status(200).send(responseBody);
+
+        }
+    })
+
+        }
+    })
+}})
 
 apiRouter.post('/calculate', function(req, res){
 	console.log(req.body);

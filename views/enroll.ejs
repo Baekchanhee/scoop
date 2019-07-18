@@ -22,10 +22,7 @@
 
 
 <script>
-    function CloseWindow(){
-                    self.opener = self;
-                    window.close();
-                }
+    
 
     $(document).ready(function() {
         var urlParams = new URLSearchParams(window.location.search);
@@ -81,6 +78,10 @@
                 kakaoId : $("#kakaoId").val(),
             },
             success:function(data){
+                function CloseWindow(){
+                    self.opener = self;
+                    window.close();
+                }
                 CloseWindow();
             }
         })
