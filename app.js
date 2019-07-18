@@ -444,55 +444,44 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var params = bodyjson.action.params;
  
 	var id = bodyjson.userRequest.user.id;
- 
+	var sql = "SELECT * FROM user WHERE kakaoId = ?";
 	
-	var sql = "SELECT name, score FROM user WHERE kakaoId = ?;";
-	
-	connection.query(sql, [id], function(err, result){
-	   console.log(result)
-	   console.log(err)
-	   var naming = result[0].name;
-				 var score = result[0].score;
-				  
-	   var responseBody = {
-				 version: "2.0",
-				 data: {
-						 "score": score,
-						 "name": naming
-								 }
- 
-		 };
- 
-	 res.status(200).send(responseBody);
-	  
-	});
 
+    var result = connectionsyn.query(sql, [id]);
+    console.log(result);
+	var name = result[0].name;
+	var score = result[0].score;	
 
-	var sql = "SELECT aptname FROM apt WHERE brand = ? AND district = ?;";
+	var sql = "SELECT * FROM selection WHERE kakaoId = ?"
+	var result = connectionsyn.query(sql, [id]);
+	console.log(result);
+	var brand = result[0].brand;
+	var district = result[0].district;
 	
-	connection.query(sql, [id], function(err, result){
-	   console.log(result)
-	   console.log(err)
-	   var aptname = result[0].aptname;
-				  
-	   var responseBody = {
-				 version: "2.0",
-				 data: {
-						 "score": score,
-						 "name": naming,
-						 "aptname": aptname
-								 }
- 
-		 };
- 
-	 res.status(200).send(responseBody);
-	  
-	});
- 
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
+	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(result);
+	var aptname = result[0].aptname;
 	
+	var blockId = ['5d2f08f48192ac000132b492', '5d2f08fe8192ac000132b494', '5d2f09058192ac000132b497', '5d2f090c8192ac000132b499', '5d2f09778192ac000132b4a6', '5d2f097e8192ac000132b4a9', '5d2f09858192ac000132b4ac', '5d2f098c8192ac000132b4af', '5d2f09938192ac000132b4b2', '5d2f099a8192ac000132b4b5']
+	var il = [];
+	
+	var responseBody = {
+		"version": "2.0",
+		
+		data: {
+			"score": score,
+			"name": name,
+			"aptname": aptname
+					}	
+	  }		
+
+	console.log(responseBody);
+	  res.status(200).send(responseBody);
+
+		
+})
 	   
- })
-
 
 apiRouter.post('/rec', function(req, res){
 	
