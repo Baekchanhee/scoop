@@ -444,6 +444,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var params = bodyjson.action.params;
  
 	var id = bodyjson.userRequest.user.id;
+	var blid = bodyjson.userRequest.block.id;
 	var sql = "SELECT * FROM user WHERE kakaoId = ?";
 	
 
@@ -464,7 +465,48 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var aptname = result[0].aptname;
 	
 	var blockId = ['5d2f08f48192ac000132b492', '5d2f08fe8192ac000132b494', '5d2f09058192ac000132b497', '5d2f090c8192ac000132b499', '5d2f09778192ac000132b4a6', '5d2f097e8192ac000132b4a9', '5d2f09858192ac000132b4ac', '5d2f098c8192ac000132b4af', '5d2f09938192ac000132b4b2', '5d2f099a8192ac000132b4b5']
-	var il = [];
+	
+	if(blid==blockId[0]){
+
+		var aptname = result[0].aptname;
+
+	}else if(blid==blockId[1]){
+
+		var aptname = result[1].aptname;
+
+	}else if(blid==blockId[2]){
+
+		var aptname = result[2].aptname;
+
+	}else if(blid==blockId[3]){
+
+		var aptname = result[3].aptname;
+
+	}else if(blid==blockId[4]){
+
+		var aptname = result[4].aptname;
+
+	}else if(blid==blockId[5]){
+
+		var aptname = result[5].aptname;
+
+	}else if(blid==blockId[6]){
+
+		var aptname = result[6].aptname;
+
+	}else if(blid==blockId[7]){
+
+		var aptname = result[7].aptname;
+
+	}else if(blid==blockId[8]){
+
+		var aptname = result[8].aptname;
+
+	}else if(blid==blockId[9]){
+
+		var aptname = result[9].aptname;
+		
+	}
 
 	
 	
