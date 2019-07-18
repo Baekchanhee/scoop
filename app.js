@@ -236,7 +236,7 @@ apiRouter.post('/transaction', function(req, res){
 	var sql = "SELECT * FROM user WHERE kakaoId = ?";
 	
 	var result = connectionsyn.query(sql, [id]);
-	if(result.length == 0){
+	if(!result[fintechnum]){
 		var responseBody = {
 			"version": "2.0",
 			"template": {
