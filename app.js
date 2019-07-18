@@ -351,8 +351,134 @@ apiRouter.post('/transaction', function(req, res){
 			var balance = accessRequestResult.balance_amt;
 			//입금 count
 			console.log(balance);
-			var count = accessRequestResult.res_list.length;
-			console.log(count);
+			var length = accessRequestResult.res_list.length;
+			console.log(length);
+			var count = 0;
+			var months = [false, false, false, false, false, false, false, false, false, false, false, false];
+			var year = accessRequestResult.res_list[0].tran_date.substring(0,4);
+			var month = accessRequestResult.res_list[0].tran_date.substring(4,6);
+			if(accessRequestResult.res_list[0].inout_type == "입금"){
+				count = count + 1;
+			if(month == "01"){
+				months[0] = true;
+			}else if(month == "02"){
+				months[1] = true;
+			}else if(month == "03"){
+				months[2] = true;
+			}else if(month == "04"){
+				months[3] = true;
+			}else if(month == "05"){
+				months[4] = true;
+			}else if(month == "06"){
+				months[5] = true;
+			}else if(month == "07"){
+				months[6] = true;
+			}else if(month == "08"){
+				months[7] = true;
+			}else if(month == "09"){
+				months[8] = true;
+			}else if(month == "10"){
+				months[9] = true;
+			}else if(month == "11"){
+				months[10] = true;
+			}else if(month == "12"){
+				months[11] = true;
+			}
+
+			}
+			for(var i = 1; i < length; i++){
+				if(accessRequestResult.res_list[i].inout_type == "입금"){					
+					if(year != accessRequestResult.res_list[i].tran_date.substring(0,4)){
+						year = accessRequestResult.res_list[i].tran_date.substring(0,4);
+						months = [false, false, false, false, false, false, false, false, false, false, false, false];
+					}
+					if(month == "01"){
+						if(months[0] == true){
+							continue;
+						}else{						
+							months[0] = true;
+							count = count + 1;
+						}
+					}else if(month == "02"){
+						if(months[1] == true){
+							continue;
+						}else{						
+							months[1] = true;
+							count = count + 1;
+						}
+					}else if(month == "03"){
+						if(months[2] == true){
+							continue;
+						}else{						
+							months[2] = true;
+							count = count + 1;
+						}
+					}else if(month == "04"){
+						if(months[3] == true){
+							continue;
+						}else{						
+							months[3] = true;
+							count = count + 1;
+						}
+					}else if(month == "05"){
+						if(months[4] == true){
+							continue;
+						}else{						
+							months[4] = true;
+							count = count + 1;
+						}
+					}else if(month == "06"){
+						if(months[5] == true){
+							continue;
+						}else{						
+							months[5] = true;
+							count = count + 1;
+						}
+					}else if(month == "07"){
+						if(months[6] == true){
+							continue;
+						}else{						
+							months[6] = true;
+							count = count + 1;
+						}
+					}else if(month == "08"){
+						if(months[7] == true){
+							continue;
+						}else{						
+							months[7] = true;
+							count = count + 1;
+						}
+					}else if(month == "09"){
+						if(months[8] == true){
+							continue;
+						}else{						
+							months[8] = true;
+							count = count + 1;
+						}
+					}else if(month == "10"){
+						if(months[9] == true){
+							continue;
+						}else{						
+							months[9] = true;
+							count = count + 1;
+						}
+					}else if(month == "11"){
+						if(months[10] == true){
+							continue;
+						}else{						
+							months[10] = true;
+							count = count + 1;
+						}
+					}else if(month == "12"){
+						if(months[11] == true){
+							continue;
+						}else{						
+							months[11] = true;
+							count = count + 1;
+						}
+					}
+				}
+			}
 
 			var responseBody = {
 				"version": "2.0",
@@ -361,7 +487,7 @@ apiRouter.post('/transaction', function(req, res){
 						{
 							"simpleText": {
 								"text": name+"님의 계좌등록이 완료되었습니다!\n"+"아래 내용을 확인해주세요.\n"
-								+"―――――――\n"+"✨ 은행명 :"+bank+"\n"+"✨ 계좌번호 :"+account+"\n"+"✨ 납입횟수 :"+count							
+								+"―――――――\n"+"✨ 은행명 :"+bank+"\n"+"✨ 계좌번호 :"+account+"\n"+"✨ 납입횟수 :"+count+"\n"+"✨ 계좌잔액 :"+balance							
 								
 							}
 						},
