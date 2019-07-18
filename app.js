@@ -237,7 +237,7 @@ apiRouter.post('/testenroll', function(req,res){
 			console.log("finnum:"+finnum);
 			var bank = accessRequestResult.res_list[0].bank_name;
 			console.log("bank:"+bank);
-			var account = accessRequestResult.res_list[0].accout_num_masked;
+			var account = accessRequestResult.res_list[0].account_num_masked;
 			console.log("account:"+account);
 			var sql = "UPDATE user SET name = '"+name+"', fintechnum = '"+finnum+"' where kakaoId = '"+id+"'";
             connection.query(sql, function(err, result){
@@ -280,8 +280,9 @@ apiRouter.post('/testenroll', function(req,res){
             var accessRequestResult = JSON.parse(body);
 			var balance = accessRequestResult.balance_amt;
 			//입금 count
+			console.log(balance);
 			var count = accessRequestResult.res_list.length;
-
+			console.log(count);
 			var responseBody = {
                 version: "2.0",
                 data: {
