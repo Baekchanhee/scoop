@@ -561,9 +561,11 @@ apiRouter.get('/callback', function(req, res) {
 	
     
     request(option, function(err, response, body){
-	if(err) throw err;
-	else {
-	    console.log(body);
+		if(err) throw err;
+		else {
+			console.log(body);
+			var accessRequestResult = JSON.parse(body);
+            console.log(accessRequestResult);
 	}
     })
 })
