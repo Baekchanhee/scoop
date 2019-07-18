@@ -176,12 +176,12 @@ apiRouter.post('/welcome', function(req, res){
 })
 
 app.post('/join', function(req, res){
-    
+    var body = req.body;
     var name = req.body.name;
     var accessToken = req.body.accessToken;
 	var useNum = req.body.useseqnum;
 	var kakaoId = req.body.kakaoId;
-
+	console.log(body);
 	console.log(name, accessToken, useNum);
 	//var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	
