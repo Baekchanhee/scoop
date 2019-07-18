@@ -243,11 +243,7 @@ apiRouter.post('/transaction', function(req, res){
 			"version": "2.0",
 			"template": {
 				"outputs": [
-					{
-						"simpleText": {
-							"text": "계좌등록이 되지 않았습니다."
-						}
-					},
+					
 					{
 					"basicCard": {
 											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
@@ -272,6 +268,11 @@ apiRouter.post('/transaction', function(req, res){
 						  }
 						
 						]
+						}
+					},
+					{
+						"simpleText": {
+							"text": "계좌등록이 되지 않았습니다."
 						}
 					}
 				]
