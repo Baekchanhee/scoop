@@ -25,6 +25,14 @@
                     self.opener = self;
                     window.close();
                 }
+
+    $(document).ready(function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var kakaoId = urlParams.get('id');
+        $('#kakaoId').val(kakaoId);
+    });
+    
+    
     $('#authBtn').click(function(){
     
     var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
