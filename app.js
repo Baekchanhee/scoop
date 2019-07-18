@@ -203,8 +203,109 @@ app.post('/join', function(req, res){
 })
 
 apiRouter.post('/testenroll', function(req,res){
-	
+
 	var bodyjson = req.body;
+	console.log(bodyjson);
+	var id = bodyjson.userRequest.user.id;
+	
+	var sql = "SELECT * FROM user WHERE kakaoId = ?";
+	
+	var result = connectionsyn.query(sql, [id]);
+    console.log(result);
+	var accessToken = result[0].accessToken;
+	var useseqnum = result[0].useseqnum;	
+	
+	var user_seq_no = useseqnum;
+    var qs = "?user_seq_no="+user_seq_no;
+    var getAccountUrl = "https://testapi.open-platform.or.kr/user/me"+qs;
+    var option = {
+        method : "GET",
+        url : getAccountUrl,
+        headers : {
+            "Authorization" : "Bearer "+accessToken
+        }
+        
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+			var accessRequestResult = JSON.parse(body);
+			var name = accessRequestResult.user_name;			
+			console.log("name:"+name);
+			var finnum = accessRequestResult.res_list[0].fintech_use_num;
+			console.log("finnum:"+finnum);
+			var bank = accessRequestResult.res_list[0].bank_name;
+			console.log("bank:"+bank);
+			var account = accessRequestResult.res_list[0].accout_num_masked;
+			console.log("account:"+account);
+			var sql = "UPDATE user SET name = '"+name+"', fintechnum = '"+finnum+"' where kakaoId = '"+id+"'";
+            connection.query(sql, function(err, result){
+				console.log("update:"+result);
+				console.log(err);
+		})
+
+		var fintech_use_num = finnum;
+    	var inquiry_type = "A";
+    	var from_date = "19190718";
+    	var to_date = "20190718";
+    	var sort_order = "D";
+    	var page_index = "1";
+    	var tran_dtime = "20190310101921";
+    	var befor_inquiry_trace_info = "123";
+		var list_tran_seqno = "0";
+		
+		var qs = "?fintech_use_num="+fintech_use_num+"&"
+        + "inquiry_type="+inquiry_type+"&"
+        + "from_date="+from_date+"&"
+        + "to_date="+to_date+"&"
+        + "sort_order="+sort_order+"&"
+        + "page_index="+page_index+"&"
+        + "tran_dtime="+tran_dtime+"&"
+        + "befor_inquiry_trace_info="+befor_inquiry_trace_info+"&"
+        + "list_tran_seqno="+list_tran_seqno+"&"
+    var getBalanceUrl = "https://testapi.open-platform.or.kr/v1.0/account/transaction_list"+qs;
+    var option = {
+        method : "GET",
+        url : getBalanceUrl,
+        headers : {
+            Authorization : "Bearer "+accessToken
+        }
+        
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+            var accessRequestResult = JSON.parse(body);
+			var balance = accessRequestResult.balance_amt;
+			//입금 count
+			var count = accessRequestResult.res_list.length;
+
+			var responseBody = {
+                version: "2.0",
+                data: {
+						"name": name,
+						"bank": bank,
+						"account": account,
+						"count": count,
+						"balance": balance
+	        }
+
+        };
+
+	 res.status(200).send(responseBody);
+
+        }
+    })
+
+        }
+    })
+
+
+    
+	
+	/*var bodyjson = req.body;
 	console.log(bodyjson);
 	var id = bodyjson.userRequest.user.id;
 	var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
@@ -223,7 +324,7 @@ apiRouter.post('/testenroll', function(req,res){
 		
 	};	
 
-	res.status(200).send(responseBody);		 
+	res.status(200).send(responseBody);*/		 
 		
 })
 
