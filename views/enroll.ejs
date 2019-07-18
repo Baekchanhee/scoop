@@ -71,22 +71,14 @@
     })
 
     $("#joinBtn").click(function(){
-        var n = $("#nameInput").val();
-        var a = $("#accessToken").val();
-        var u = $("#useseqnum").val();
-        var k = $("#kakaoId").val();
-        console.log(n);
-        console.log(a);
-        console.log(u);
-        console.log(k);
         $.ajax({
             url:'http://13.124.84.213/join',
             type : 'POST',
             data : {
-                name : $("#nameInput").val(),
-                accessToken : $("#accessToken").val(),
-                useseqnum : $("#useseqnum").val(),
-                kakaoId : $("#kakaoId").val(),
+                "name" : $("#nameInput").val(),
+                "accessToken" : $("#accessToken").val(),
+                "useseqnum" : $("#useseqnum").val(),
+                "kakaoId" : $("#kakaoId").val(),
             },
             success:function(data){
                 console.log(data);
