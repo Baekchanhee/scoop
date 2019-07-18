@@ -538,7 +538,9 @@ apiRouter.get('/enroll', function(req, res, next){
 
 apiRouter.get('/callback', function(req, res) {
     var authcode = req.query.code;
-    console.log(authcode);
+	console.log(req);
+	console.log(authcode);
+	
     
     var getTokenUrl = "https://testapi.open-platform.or.kr/oauth/2.0/token"
     var option = {
@@ -551,15 +553,19 @@ apiRouter.get('/callback', function(req, res) {
 	    code : authcode,
 	    client_id : "l7xx533bb156ace64c6eb6e19b2db4583e76",
 	    client_secret : "bfddf87bbf1743eb8277b0d1dd6deff7",
-	    redirect_uri : "http://localhost:3000/api/callback",
+	    redirect_uri : "http://13.124.84.213/api/callback",
 	    grant_type : "authorization_code"
 	}
-    }
+	}
+	
+	
     
     request(option, function(err, response, body){
-	if(err) throw err;
-	else {
-	    console.log(body);
+		if(err) throw err;
+		else {
+			console.log(body);
+			var accessRequestResult = JSON.parse(body);
+            console.log(accessRequestResult);
 	}
     })
 })
