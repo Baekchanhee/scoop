@@ -657,7 +657,7 @@ apiRouter.post('/visual', function(req, res){
 	var brand = result[0].brand;
 	var district = result[0].district;
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?AND score <="+(parseInt(score)+5)+"AND score >="+(parseInt(score)-5);
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -755,7 +755,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var district = result[0].district;
 
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+"AND score >="+(parseInt(score)-5);
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -866,7 +866,7 @@ apiRouter.post('/rec', function(req, res){
 	var district = result[0].district;
 	
 	//scroe - 10 orderby 나중에 추가
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?AND score <="+(parseInt(score)+5)+"AND score >="+(parseInt(score)-5);
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
