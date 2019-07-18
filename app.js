@@ -461,16 +461,12 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(result);
-	
+	var aptname = result[0].aptname;
 	
 	var blockId = ['5d2f08f48192ac000132b492', '5d2f08fe8192ac000132b494', '5d2f09058192ac000132b497', '5d2f090c8192ac000132b499', '5d2f09778192ac000132b4a6', '5d2f097e8192ac000132b4a9', '5d2f09858192ac000132b4ac', '5d2f098c8192ac000132b4af', '5d2f09938192ac000132b4b2', '5d2f099a8192ac000132b4b5']
 	var il = [];
 
-	for(var i = 0; i < result.length; i++){
-
-	     var aptname = result[i].aptname;
-		 il.push(aptname);
-	 }
+	
 	
 	var responseBody = {
 		"version": "2.0",
@@ -478,8 +474,8 @@ apiRouter.post('/cutlinescore', function(req, res){
 		data: {
 			"score": score,
 			"name": name,
-			//"aptname": aptname
-			"aptname": li
+			"aptname": aptname
+			
 					}	
 	  }		
 
