@@ -39,7 +39,7 @@ app.use(express.static(__dirname+'/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//서버 test용 한지은
+//서버 test용 한지은 이민지
 app.get('/', function(req, res) {
 	res.render('hello');
 });
