@@ -176,7 +176,7 @@ apiRouter.post('/welcome', function(req, res){
 })
 
 app.post('/join', function(req, res){
-    console.log(req);
+    
     var name = req.body.name;
     var accessToken = req.body.accessToken;
 	var useNum = req.body.useseqnum;
