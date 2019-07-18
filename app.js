@@ -448,7 +448,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	});
 
 
-	var sql = "SELECT aptname FROM apt WHERE kakaoId = ?;";
+	var sql = "SELECT aptname FROM apt WHERE brand = ? AND district = ?;";
 	
 	connection.query(sql, [id], function(err, result){
 	   console.log(result)
