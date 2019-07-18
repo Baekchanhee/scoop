@@ -6,8 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
 </head>
 <body>
-        <button type="button" id="authBtn" class="button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">인증받기</button>
-        <strong id="authCheck" style="display:none;">계좌 인증 완료 되었습니다!! 뒤로 돌아가주시기 바랍니다.</strong>
+        <span>닉네임을 입력해주세요!</span>
+        <input type="name" id="nameInput" placeholder="닉네임">
+        <input type="hidden" id="kakaoId" >
+        <input type="hidden" id="accessToken" >
+        <input type="hidden" id="useseqnum" >        
+        <button type="button" id="authBtn">계좌 인증</button>
+        <p id="authCheck" style="display:none;">계좌 인증 완료 되었습니다!!</p>
+        <a href="#" id="joinBtn">계좌 등록</a>
 </body>
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
@@ -53,6 +59,22 @@
         })
 
     })
+
+    $("#joinBtn").click(function(){
+        $.ajax({
+            url:'http://13.124.84.213/join',
+            type : 'POST',
+            data : {
+                name : $("#nameInput").val(),
+                accessToken : $("#accessToken").val(),
+                useseqnum : $("#useseqnum").val(),
+                kakaoId : $("kakaoId").val()
+            },
+            success:function(data){
+                alert(data);
+            }
+        })
+    });
      
 
 </script>
