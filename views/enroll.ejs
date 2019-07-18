@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
 </head>
 <body>
-        <span>닉네임을 입력해주세요!</span>
-        <input type="name" id="nameInput" placeholder="닉네임">
         <input type="hidden" id="kakaoId" >
         <input type="hidden" id="accessToken" >
         <input type="hidden" id="useseqnum" >        
@@ -72,7 +70,7 @@
             url:'http://13.124.84.213/join',
             type : 'POST',
             data : {
-                name : $("#nameInput").val(),
+                
                 accessToken : $("#accessToken").val(),
                 useseqnum : $("#useseqnum").val(),
                 kakaoId : $("#kakaoId").val(),
