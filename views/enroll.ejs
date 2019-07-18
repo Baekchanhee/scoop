@@ -7,6 +7,7 @@
 </head>
 <body>
         <button type="button" id="authBtn" class="button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">인증받기</button>
+        <strong id="authCheck" style="display:none;">계좌 인증 완료 되었습니다!! 뒤로 돌아가주시기 바랍니다.</strong>
 </body>
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
@@ -21,7 +22,7 @@
     $('#authBtn').click(function(){
     
     var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
-    var redirect_uri = "http://13.124.84.213/api/enroll"; 
+    var redirect_uri = "http://13.124.84.213/api/callback"; 
     var scope = "login inquiry transfer";
     var response_type = "JSON";
     var qs =
@@ -43,7 +44,7 @@
                 console.log(data.location);
                 var tmpwindow = window.open("about:blank");
                 tmpwindow.location = data.location;//추가
-                CloseWindow();
+                
 
 
 
