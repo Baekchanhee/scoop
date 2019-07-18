@@ -33,9 +33,11 @@ var port = process.env.PORT || 3000;
 
 app.use(logger('dev', {}));
 app.use(bodyParser.json());
+
 app.use('/api', apiRouter);
 app.use(express.static(__dirname+'/public'));
-
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -121,7 +123,12 @@ apiRouter.post('/welcome', function(req, res){
 						  {
 							"action": "webLink",
 							"label": "계좌등록",
-							"webLinkUrl": "http://13.124.84.213/api/enroll"
+							"webLinkUrl": "http://13.124.84.213/api/enroll?id="+id
+						  },
+						  {
+							"action": "block",
+							"label": "시작하기",
+							"blockId": "5d2c1cc2ffa7480001003c46"
 						  },
 						  {
 							"action":  "block",
@@ -176,12 +183,12 @@ apiRouter.post('/welcome', function(req, res){
 })
 
 app.post('/join', function(req, res){
-    
+    var body = req.body;
     var name = req.body.name;
     var accessToken = req.body.accessToken;
 	var useNum = req.body.useseqnum;
 	var kakaoId = req.body.kakaoId;
-
+	console.log(body);
 	console.log(name, accessToken, useNum);
 	//var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	

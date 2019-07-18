@@ -14,11 +14,12 @@
         <button type="button" id="authBtn">계좌 인증</button>
         <p id="authCheck" style="display:none;">계좌 인증 완료 되었습니다!!</p>
         <a href="#" id="joinBtn">계좌 등록</a>
-</body>
+
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
   crossorigin="anonymous"></script>
+
 
 <script>
     function CloseWindow(){
@@ -29,6 +30,7 @@
     $(document).ready(function() {
         var urlParams = new URLSearchParams(window.location.search);
         var kakaoId = urlParams.get('id');
+        console.log(kakaoId);
         $('#kakaoId').val(kakaoId);
     });
     
@@ -76,15 +78,15 @@
                 name : $("#nameInput").val(),
                 accessToken : $("#accessToken").val(),
                 useseqnum : $("#useseqnum").val(),
-                kakaoId : $("kakaoId").val()
+                kakaoId : $("#kakaoId").val(),
             },
             success:function(data){
-                alert(data);
+                CloseWindow();
             }
         })
     });
      
 
 </script>
-
+</body>
 </html>
