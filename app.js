@@ -275,6 +275,7 @@ apiRouter.post('/transaction', function(req, res){
 				]
 			}
 		};
+		res.status(200).send(responseBody);
 	}else{
     console.log(result);
 	var accessToken = result[0].accessToken;
