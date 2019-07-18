@@ -20,7 +20,7 @@ window.onload=function(){
     
     $.ajax({
         
-        url:'https://testapi.open-platform.or.kr/oauth/2.0/authorize2?response_type=code&client_id=l7xx533bb156ace64c6eb6e19b2db4583e76&redirect_uri =http://13.124.84.213/api/callback&scope=login inquiry&auth_type=0&invoke_type=ajax',
+        url:'https://testapi.open-platform.or.kr/oauth/2.0/authorize' + qs,
 	    type : 'GET',
             success:function(data){
                 window.name ="parents";
