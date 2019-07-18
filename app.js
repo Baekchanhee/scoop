@@ -194,7 +194,7 @@ app.post('/join', function(req, res){
 		console.log("계좌인증부터하시라!")	
 	}else{
     var sql = 'INSERT INTO user (kakaoId,  accessToken, useseqnum) VALUES (?,?,?);'
-    connection.query(sql,[kakaoId, name, accessToken, useNum], function (error, results) {
+    connection.query(sql,[kakaoId, accessToken, useNum], function (error, results) {
       if (error) throw error;  
       else {
           console.log(this.sql);
