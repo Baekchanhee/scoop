@@ -418,38 +418,38 @@ apiRouter.post('/homeinfo', function(req, res){
 
 apiRouter.post('/cutlinescore', function(req, res){
 	console.log(req.body);
-
+ 
 	console.log(req.body);
 	var bodyjson = req.body;
 	var params = bodyjson.action.params;
-
+ 
 	var id = bodyjson.userRequest.user.id;
-
-
-	    		var sql = "SELECT name, score FROM user WHERE kakaoId = ?;";
-				var naming = result[0].name;
-				var score = result[0].score;
-
-				var sql = "SELECT aptname FROM apt WHERE kakaoId = ?;";
-				var aptname = result[0].aptname;
+ 
 	
-		connection.query(sql, [id], function(err, result){
-					  
-		var responseBody = {
-                version: "2.0",
-                data: {
-                        "score": score,
-						"name": naming,
-						"aptname": aptname
-				     }
-
-        };
-
+	var sql = "SELECT name, score FROM user WHERE kakaoId = ?;";
+	
+	connection.query(sql, [id], function(err, result){
+	   console.log(result)
+	   console.log(err)
+	   var naming = result[0].name;
+				 var score = result[0].score;
+				  
+	   var responseBody = {
+				 version: "2.0",
+				 data: {
+						 "score": score,
+						 "name": naming
+								 }
+ 
+		 };
+ 
 	 res.status(200).send(responseBody);
 	  
-	});	
-		
-})
+	});
+ 
+	
+	   
+ })
 
 apiRouter.post('/rec', function(req, res){
 	
