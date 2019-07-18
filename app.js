@@ -426,26 +426,40 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var id = bodyjson.userRequest.user.id;
  
 	
+	var sql = "SELECT name, score FROM user WHERE kakaoId = ?;";
 	
-	var sql = "SELECT * FROM user WHERE kakaoId = ?";	
-    var result = connectionsyn.query(sql, [id]);
-    console.log(result);
-	var name = result[0].name;
-	var score = result[0].score;	
-	
-		
-	//scroe - 10 orderby 나중
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?"
-	var result = connectionsyn.query(sql, [brand, district]);
-	console.log(result);
-	var aptname = result[0].aptname;
-	
-	
+	connection.query(sql, [id], function(err, result){
+	   console.log(result)
+	   console.log(err)
+	   var naming = result[0].name;
+				 var score = result[0].score;
+				  
 	   var responseBody = {
 				 version: "2.0",
 				 data: {
 						 "score": score,
-						 "name": name,
+						 "name": naming
+								 }
+ 
+		 };
+ 
+	 res.status(200).send(responseBody);
+	  
+	});
+
+
+	var sql = "SELECT aptname FROM apt WHERE kakaoId = ?;";
+	
+	connection.query(sql, [id], function(err, result){
+	   console.log(result)
+	   console.log(err)
+	   var aptname = result[0].aptname;
+				  
+	   var responseBody = {
+				 version: "2.0",
+				 data: {
+						 "score": score,
+						 "name": naming,
 						 "aptname": aptname
 								 }
  
@@ -453,7 +467,10 @@ apiRouter.post('/cutlinescore', function(req, res){
  
 	 res.status(200).send(responseBody);
 	  
-	 
+	});
+ 
+	
+	   
  })
 
 
