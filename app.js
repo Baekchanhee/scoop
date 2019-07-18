@@ -571,7 +571,6 @@ apiRouter.get('/enroll', function(req, res, next){
 apiRouter.get('/callback', function(req, res) {
 	var authcode = req.query.code;
 	console.log("callback 들어오니??");
-	console.log(req);
 	console.log(authcode);
 	
     
@@ -598,7 +597,8 @@ apiRouter.get('/callback', function(req, res) {
 		else {
 			console.log(body);
 			var accessRequestResult = JSON.parse(body);
-            console.log(accessRequestResult);
+			console.log(accessRequestResult);
+			res.render('resultChild', {data : accessRequestResult});
 	}
     })
 })
