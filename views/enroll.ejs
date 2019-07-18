@@ -14,6 +14,10 @@
   crossorigin="anonymous"></script>
 
 <script>
+    function CloseWindow(){
+                    self.opener = self;
+                    window.close();
+                }
 window.onload=function(){
     
     var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
@@ -39,7 +43,7 @@ window.onload=function(){
                 console.log(data.location);
                 var tmpwindow = window.open("about:blank");
                 tmpwindow.location = data.location;//추가
-                window.close();
+                CloseWindow();
             }
         })
     }   
