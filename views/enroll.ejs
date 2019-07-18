@@ -27,6 +27,10 @@
 
 
 <script>
+    function CloseWindow(){
+                    self.opener = self;
+                    window.close();
+                }
     
 
     $(document).ready(function() {
@@ -83,13 +87,12 @@
                 kakaoId : $("#kakaoId").val(),
             },
             success:function(data){
-                function CloseWindow(){
-                    self.opener = self;
-                    window.close();
-                }
-                CloseWindow();
+                
+                
             }
         })
+
+        CloseWindow();
     });
 
 </script>
