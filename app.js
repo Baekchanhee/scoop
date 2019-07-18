@@ -236,6 +236,8 @@ apiRouter.post('/transaction', function(req, res){
 	var sql = "SELECT * FROM user WHERE kakaoId = ?";
 	
 	var result = connectionsyn.query(sql, [id]);
+	console.log(id);
+	console.log(result.length);
 	if(result.length == 0){
 		var responseBody = {
 			"version": "2.0",
