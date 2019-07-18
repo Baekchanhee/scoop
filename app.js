@@ -751,9 +751,11 @@ apiRouter.post('/cutlinescore', function(req, res){
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
+
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(int(score)+5)+"AND score >="+(int(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(sql);
 	console.log(result);
 
 	
