@@ -387,7 +387,8 @@ apiRouter.post('/transaction', function(req, res){
 						{
 							"label": "청약가점계산하기",
 							"action": "block",
-							"blockId": "5d2c1cc2ffa7480001003c46"
+							
+							"blockId": "5d2be86bb617ea000117907f"
 						}
 
 					]
