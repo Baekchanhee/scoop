@@ -359,6 +359,7 @@ apiRouter.post('/transaction', function(req, res){
 			var month = accessRequestResult.res_list[0].tran_date.substring(4,6);
 			if(accessRequestResult.res_list[0].inout_type == "입금"){
 				count = count + 1;
+				console.log(accessRequestResult.res_list[0]);
 			if(month == "01"){
 				months[0] = true;
 			}else if(month == "02"){
@@ -385,98 +386,127 @@ apiRouter.post('/transaction', function(req, res){
 				months[11] = true;
 			}
 
+			}else{
+				console.log("skip 0"+accessRequestResult.res_list[0]);
 			}
 			for(var i = 1; i < length; i++){
-				if(accessRequestResult.res_list[i].inout_type == "입금"){					
+				if(accessRequestResult.res_list[i].inout_type == "입금"){										
 					if(year != accessRequestResult.res_list[i].tran_date.substring(0,4)){
 						year = accessRequestResult.res_list[i].tran_date.substring(0,4);
 						months = [false, false, false, false, false, false, false, false, false, false, false, false];
 					}
+					month = accessRequestResult.res_list[i].tran_date.substring(4,6);
 					if(month == "01"){
 						if(months[0] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[0] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "02"){
 						if(months[1] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[1] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "03"){
 						if(months[2] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[2] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "04"){
 						if(months[3] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[3] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "05"){
 						if(months[4] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[4] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "06"){
 						if(months[5] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[5] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "07"){
 						if(months[6] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[6] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "08"){
 						if(months[7] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[7] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "09"){
 						if(months[8] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[8] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "10"){
 						if(months[9] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[9] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "11"){
 						if(months[10] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[10] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}else if(month == "12"){
 						if(months[11] == true){
+							console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 							continue;
 						}else{						
 							months[11] = true;
 							count = count + 1;
+							console.log(accessRequestResult.res_list[i]);
 						}
 					}
+				}else{
+					console.log("skip "+i+" "+accessRequestResult.res_list[i]);
 				}
 			}
 
