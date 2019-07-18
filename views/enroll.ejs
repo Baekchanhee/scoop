@@ -1,3 +1,13 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+</head>
+<body>
+
+</body>
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -7,7 +17,7 @@
 window.onload=function(){
     
     var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
-    var redirect_uri = "http://13.124.84.213/api/callback"; 
+    var redirect_uri = "http://13.124.84.213/api/enroll"; 
     var scope = "login inquiry transfer";
     var response_type = "JSON";
     var qs =
@@ -17,19 +27,22 @@ window.onload=function(){
     + "scope="+scope+"&"
     + "auth_type=0&"
     + "invoke_type=ajax"
-    
-    $.ajax({
-        
-        url:'https://testapi.open-platform.or.kr/oauth/2.0/authorize' + qs,
-	    type : 'GET',
+
+    console.log(qs);
+
+    $.ajax({        
+        url:'https://testapi.open-platform.or.kr/oauth/2.0/authorize2' + qs,
+        type : 'GET',
             success:function(data){
                 window.name ="parents";
+                console.error(data);
                 console.log(data.location);
-                // var tmpwindow = window.open("about:blank");
-                // tmpwindow.location = data.location;//추가
+                var tmpwindow = window.open("about:blank");
+                tmpwindow.location = data.location;//추가
             }
         })
     }   
 
 </script>
 
+</html>
