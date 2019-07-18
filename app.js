@@ -236,6 +236,46 @@ apiRouter.post('/transaction', function(req, res){
 	var sql = "SELECT * FROM user WHERE kakaoId = ?";
 	
 	var result = connectionsyn.query(sql, [id]);
+	if(result.length == 0){
+		var responseBody = {
+			"version": "2.0",
+			"template": {
+				"outputs": [
+					{
+						"simpleText": {
+							"text": "계좌등록이 되지 않았습니다."
+						}
+					},
+					{
+					"basicCard": {
+											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
+						"thumbnail": {
+						  "imageUrl": "https://i.imgur.com/zDRSmHu.jpg"
+						},
+						"buttons": [
+						  {
+							"action": "webLink",
+							"label": "계좌등록",
+							"webLinkUrl": "http://13.124.84.213/api/enroll?id="+id
+						  },
+						  {
+							"action": "block",
+							"label": "시작하기",
+							"blockId": "5d2c1cc2ffa7480001003c46"
+						  },
+						  {
+							"action":  "block",
+							"label": "테스트용",
+							"blockId": "5d30356eb617ea0001da2890"
+						  }
+						
+						]
+						}
+					}
+				]
+			}
+		};
+	}else{
     console.log(result);
 	var accessToken = result[0].accessToken;
 	var useseqnum = result[0].useseqnum;	
@@ -327,7 +367,7 @@ apiRouter.post('/transaction', function(req, res){
 
         }
     })
-})
+}})
 
 apiRouter.post('/calculate', function(req, res){
 	console.log(req.body);
