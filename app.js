@@ -783,8 +783,9 @@ apiRouter.post('/visual', function(req, res){
 	var brand = result[0].brand;
 	var district = result[0].district;
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(sql);
 	console.log(result);
 	
 	var blockId = ['5d301a1affa748000122d24a', '5d301a6cffa748000122d24e', '5d301a76ffa748000122d250', '5d301a7fffa748000122d252', '5d301a86ffa748000122d254', '5d301b28b617ea0001da272e', '5d301b49ffa748000122d258', '5d301b50ffa748000122d25a', '5d301b5792690d00011f3b6f', '5d301b5fffa748000122d25f']
@@ -839,7 +840,7 @@ apiRouter.post('/visual', function(req, res){
 			{
 			  "basicCard": {
 				"title": "상세분석 이미지",
-				"description": "위 이미지는 감성분석을 통한 결과를 시각화한 이미지입니다.",
+				"description": "위 그래프는 해당 구역 청약에 대한 사람들의 반응을 감성분석한 수치입니다.\n 현재 청약 시장에 대한 반응을 한눈에 알아보세요!",
 				"thumbnail": {
 				  "imageUrl": visual_url
 				}				
@@ -878,9 +879,11 @@ apiRouter.post('/cutlinescore', function(req, res){
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
+
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?";
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(sql);
 	console.log(result);
 
 	
@@ -989,8 +992,9 @@ apiRouter.post('/rec', function(req, res){
 	var district = result[0].district;
 	
 	//scroe - 10 orderby 나중에 추가
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ?"
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
 	var result = connectionsyn.query(sql, [brand, district]);
+	console.log(sql);
 	console.log(result);
 
 	
