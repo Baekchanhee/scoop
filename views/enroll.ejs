@@ -1,0 +1,35 @@
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+
+<script>
+window.onload=function(){
+    
+    var client_id = "l7xx533bb156ace64c6eb6e19b2db4583e76";
+    var redirect_uri = "http://13.124.84.213/api/callback"; 
+    var scope = "login inquiry transfer";
+    var response_type = "JSON";
+    var qs =
+    "?response_type=code&"
+    + "client_id="+client_id+"&"
+    + "redirect_uri=" + redirect_uri + "&"
+    + "scope="+scope+"&"
+    + "auth_type=0&"
+    + "invoke_type=ajax"
+    
+    $.ajax({
+        
+        url:'https://testapi.open-platform.or.kr/oauth/2.0/authorize2?response_type=code&client_id=l7xx533bb156ace64c6eb6e19b2db4583e76&redirect_uri =http://13.124.84.213/api/callback&scope=login inquiry&auth_type=0&invoke_type=ajax',
+	    type : 'GET',
+            success:function(data){
+                window.name ="parents";
+                console.log(data.location);
+                var tmpwindow = window.open("about:blank");
+                tmpwindow.location = data.location;//추가
+            }
+        })
+    }   
+
+</script>
+
