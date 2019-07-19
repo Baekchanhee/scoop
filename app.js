@@ -876,10 +876,22 @@ apiRouter.post('/visual', function(req, res){
 				}				
 			  }
 			}
-		  ]
+
+			
+		  ],
+
+		  "quickReplies": [
+			{
+				"label": "이전으로",
+				"action": "block",
+				"blockId": "5d2c07f3ffa7480001003a10"
+			}
+			
+
+		]
 		}
 	  }
-
+	  
 	console.log(responseBody);
 	  res.status(200).send(responseBody);
 
