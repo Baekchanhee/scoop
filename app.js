@@ -46,6 +46,7 @@ app.get('/', function(req, res) {
 	res.render('hello');
 });
 
+//스킬 test용
 apiRouter.post('/sayHello', function(req, res) {
     var responseBody = {
 	version: "2.0",
@@ -63,6 +64,7 @@ apiRouter.post('/sayHello', function(req, res) {
     res.status(200).send(responseBody);
     });
 
+//스킬 test용
 apiRouter.post('/showHello', function(req, res) {
     console.log(req.body);
 
@@ -100,7 +102,7 @@ apiRouter.post('/checkPeriod', function(req, res){
 })
 
 
-
+// 시작 api
 apiRouter.post('/welcome', function(req, res){
 	var bodyjson = req.body;
 	console.log(bodyjson);
@@ -143,7 +145,8 @@ apiRouter.post('/welcome', function(req, res){
 			  };
 
 			  res.status(200).send(responseBody);		  
-	}else{// 계좌등록 했으면
+	}else{// 이전에 방문했으면
+		//예치금 다시 입력하기
 		//가점 다시 계산하기
 		//청약 추천 보기
 		var responseBody = {
@@ -187,6 +190,7 @@ apiRouter.post('/welcome', function(req, res){
 })
 })
 
+//계좌 등록하기
 app.post('/join', function(req, res){
     var body = req.body;
     var accessToken = req.body.accessToken;
@@ -209,6 +213,7 @@ app.post('/join', function(req, res){
     });}
 })
 
+//계좌없이 시작하기
 apiRouter.post('/testenroll', function(req,res){
 
 	var bodyjson = req.body;
@@ -245,6 +250,7 @@ apiRouter.post('/transaction', function(req, res){
 	var result = connectionsyn.query(sql, [id]);
 	console.log(id);
 	console.log(result.length);
+	//계좌 등록 안했으면!!
 	if(result.length == 0){
 		var responseBody = {
 			"version": "2.0",
@@ -287,6 +293,7 @@ apiRouter.post('/transaction', function(req, res){
 		};
 		res.status(200).send(responseBody);
 	}else{
+	//계좌 정보 가져오기
     console.log(result);
 	var accessToken = result[0].accessToken;
 	var useseqnum = result[0].useseqnum;	
@@ -321,6 +328,7 @@ apiRouter.post('/transaction', function(req, res){
 				console.log("update:"+result);
 				console.log(err);
 		})
+		//계좌 거래내역 가져오기
 
 		var fintech_use_num = finnum;
     	var inquiry_type = "A";
@@ -349,7 +357,9 @@ apiRouter.post('/transaction', function(req, res){
             Authorization : "Bearer "+accessToken
         }
         
-    };
+	};
+	
+	//납입 횟수 카운트하기
     request(option, function(err, response, body){
         if(err) throw err;
         else {
@@ -587,6 +597,7 @@ apiRouter.post('/transaction', function(req, res){
     })
 }})
 
+//가점 계산하기
 apiRouter.post('/calculate', function(req, res){
 	console.log(req.body);
 	
@@ -672,6 +683,7 @@ apiRouter.post('/calculate', function(req, res){
 )
 })
 
+//예치금 입력받기
 apiRouter.post('/testbalance', function(req, res){
 	console.log(req.body);
 	
@@ -701,6 +713,7 @@ apiRouter.post('/testbalance', function(req, res){
 
 })
 
+//주택 추천 조건 설정
 apiRouter.post('/homeinfo', function(req, res){
 	console.log(req.body);
 
@@ -836,6 +849,7 @@ apiRouter.post('/homeinfo', function(req, res){
 
 })
 
+//감성분석 시각화
 apiRouter.post('/visual', function(req, res){
 	console.log(req.body);
  
@@ -932,7 +946,7 @@ apiRouter.post('/visual', function(req, res){
 	}
 	
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+10)+" AND score >="+(parseInt(score)-10)+" AND space >="+low_limit+" AND space <"+high_limit;
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -1017,7 +1031,7 @@ apiRouter.post('/visual', function(req, res){
 		
 })
 
-
+//예측 당첨 점수
 apiRouter.post('/cutlinescore', function(req, res){
 	console.log(req.body);
  
@@ -1115,7 +1129,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	}
 	
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+10)+" AND score >="+(parseInt(score)-10)+" AND space >="+low_limit+" AND space <"+high_limit;
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -1203,7 +1217,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 		
 })
 	   
-
+//추천 주택 목록
 apiRouter.post('/rec', function(req, res){
 	
 	console.log(req.body);
@@ -1297,7 +1311,7 @@ apiRouter.post('/rec', function(req, res){
 	}
 	
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+10)+" AND score >="+(parseInt(score)-10)+" AND space >="+low_limit+" AND space <"+high_limit;
 
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
@@ -1377,7 +1391,7 @@ apiRouter.post('/rec', function(req, res){
 				{
 					"basicCard": {
 					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
-					"description": msg+ name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±5점 이내의 주택을 추천합니다.",
+					"description": msg+ name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±10점 이내의 주택을 추천합니다.",
 					"thumbnail": {
 						  "imageUrl": "https://i.imgur.com/c5BP2be.jpg"
 					}
@@ -1441,10 +1455,12 @@ apiRouter.post('/rec', function(req, res){
 		
 })
 
+//계좌 등록 페이지로 이동
 apiRouter.get('/enroll', function(req, res, next){
     res.render('enroll');
 });
 
+// 콜백 api
 apiRouter.get('/callback', function(req, res) {
 	var authcode = req.query.code;
 	console.log("callback 들어오니??");
