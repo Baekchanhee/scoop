@@ -112,7 +112,9 @@
                 kakaoId : $("#kakaoId").val(),
             },
             success:function(data){
-                console.log(data);
+                if(data == '-1'){
+                    alert("계좌인증 부터 해주세요!");
+                }
                 //CloseWindow();
             }
         })
