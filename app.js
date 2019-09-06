@@ -264,7 +264,7 @@ apiRouter.post('/transaction', function(req, res){
 						  },
 						  {
 							"action":  "block",
-							"label": "테스트용",
+							"label": "계좌없이 시작하기",
 							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						
