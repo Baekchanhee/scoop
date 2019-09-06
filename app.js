@@ -815,7 +815,8 @@ apiRouter.post('/homeinfo', function(req, res){
                         
                         "bot_brand": bot_brand,
                         "bot_area": bot_area,
-                        "name": naming
+						"name": naming,
+						"bot_pyungsu": bot_pyungsu
                                 }
 
         };
@@ -829,7 +830,7 @@ apiRouter.post('/homeinfo', function(req, res){
 
 	console.log(bot_brand);
 	console.log(bot_area);
-	
+	console.log(bot_pyungsu);
 
 		
 
