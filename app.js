@@ -1263,22 +1263,27 @@ apiRouter.post('/rec', function(req, res){
 						  "imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
 					}
 		
-				}
-				}
-				  
-								
-			  ],
-			  "quickReplies": [
-				{
-					"label": "이전으로",
-					"action": "block",
-					"blockId": "5d29f4aeffa748000100365d"
-				}
+					},
+
+					"buttons": [
+						{
+						  "action": "block",
+						  "label": "이전으로",
+						  "blockId": "5d29f4aeffa748000100365d"
+						}
+					  ]
 				
-	
-			]
-			}
-		  }	
+				}
+			]  
+								
+			 
+			
+
+
+
+
+		  }
+		}	
 	}else{
 	 responseBody = {
 		"version": "2.0",
