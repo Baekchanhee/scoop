@@ -1338,46 +1338,46 @@ apiRouter.post('/rec', function(req, res){
 	var ds;
 	var msg;
 	if(district == 0){
-		if(pyung == 0)
+		if(pyung == 0 || pyung == 1)
 			mn = 300;
-		else if(pyung == 1)
-			mn = 600;
 		else if(pyung == 2)
+			mn = 600;
+		else if(pyung == 3)
 			mn = 1000;
-		else if(pyung == 3 || pyung == 4)
+		else if(pyung == 4)
 			mn = 1500;
 		ds = "서울";
 		
 	}else if(district == 1){
-		if(pyung == 0)
+		if(pyung == 0 || pyung == 1)
 			mn = 200;
-		else if(pyung == 1)
-			mn = 300;
 		else if(pyung == 2)
+			mn = 300;
+		else if(pyung == 3)
 			mn = 400;
-		else if(pyung == 3 || pyung == 4)
+		else if(pyung == 4)
 			mn = 500;
 		ds = "경기";
 	}else if(district == 2){
-		if(pyung == 0)
+		if(pyung == 0 || pyung == 1)
 			mn = 250;
-		else if(pyung == 1)
-			mn = 400;
 		else if(pyung == 2)
+			mn = 400;
+		else if(pyung == 3)
 			mn = 700;
-		else if(pyung == 3 || pyung == 4)
+		else if(pyung == 4)
 			mn = 1000;
 		ds = "인천";
 	}
 	var pp;
-	if(pyung == 0){
-		pp = "최소"
-	}else if(pyung == 1){
+	if(pyung == 0 || pyung == 1){
 		pp = "26평이하 최소"
 	}else if(pyung == 2){
 		pp = "31평이하 최소"
-	}else if(pyung == 3 || pyung == 4){
+	}else if(pyung == 3){
 		pp = "41평이하 최소"
+	}else if(pyung == 4){
+		pp = "42평이상 최소"
 	}
 	msg = ds+"지역의 " + pp + " 예치금액은 : " + mn +"만원입니다.\n"
 		
