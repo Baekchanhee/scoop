@@ -117,7 +117,7 @@ apiRouter.post('/welcome', function(req, res){
 					  "basicCard": {
 											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
 						"thumbnail": {
-						  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
+						  "imageUrl": "https://i.imgur.com/X83c7Wl.jpg"
 						},
 						"buttons": [
 						  {
@@ -155,7 +155,7 @@ apiRouter.post('/welcome', function(req, res){
 					
 					"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다.😊🏠",
 					"thumbnail": {
-					  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
+					  "imageUrl": "https://i.imgur.com/X83c7Wl.jpg"
 					},
 					"buttons": [
 					  {
@@ -249,7 +249,7 @@ apiRouter.post('/transaction', function(req, res){
 					"basicCard": {
 											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
 						"thumbnail": {
-						  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
+						  "imageUrl": "https://i.imgur.com/X83c7Wl.jpg"
 						},
 						"buttons": [
 						  {
@@ -1049,7 +1049,7 @@ apiRouter.post('/rec', function(req, res){
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"}]'+'}';
 	   */
 
-	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
+	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/eq6UFFz.jpg" },'+
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "당첨 예상 점수 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
 	    console.log(items)
             var it = JSON.parse(items);
