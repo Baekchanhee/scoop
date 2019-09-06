@@ -1320,27 +1320,53 @@ apiRouter.post('/rec', function(req, res){
             il.push(it);
 		}
 	
-	var mn = [];
+	var mn;
 	var ds;
+	var msg;
 	if(district == 0){
-		mn.push(300);
-		mn.push(600);
-		mn.push(1000);
-		mn.push(1500);
+		if(pyung == 0)
+			mn = 300;
+		else if(pyung == 1)
+			mn = 600;
+		else if(pyung == 2)
+			mn = 1000;
+		else if(pyung == 3)
+			mn = 1500;
 		ds = "서울";
+		
 	}else if(district == 1){
-		mn.push(200);
-		mn.push(300);
-		mn.push(400);
-		mn.push(500);
+		if(pyung == 0)
+			mn = 200;
+		else if(pyung == 1)
+			mn = 300;
+		else if(pyung == 2)
+			mn = 400;
+		else if(pyung == 3)
+			mn = 500;
 		ds = "경기";
 	}else if(district == 2){
-		mn.push(250);
-		mn.push(400);
-		mn.push(700);
-		mn.push(1000);
+		if(pyung == 0)
+			mn = 250;
+		else if(pyung == 1)
+			mn = 400;
+		else if(pyung == 2)
+			mn = 700;
+		else if(pyung == 3)
+			mn = 1000;
 		ds = "인천";
 	}
+	var pp;
+	if(pyung == 0){
+		pp = "최소"
+	}else if(pyung == 1){
+		pp = "26평이하 최소"
+	}else if(pyung == 2){
+		pp = "31평이하 최소"
+	}else if(pyung == 3){
+		pp = "41평이하 최소"
+	}
+	msg = ds+"지역의 " + pp + " 예치금액은 : " + mn +"만원입니다.\n"
+		
 
 	var responseBody;
 	if(result.length == 0){
@@ -1351,7 +1377,7 @@ apiRouter.post('/rec', function(req, res){
 				{
 					"basicCard": {
 					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
-					"description": ds+"지역의 최소 예치금액은 : "+mn[0]+"만원입니다.\n26평이하 최소 예치금액은 : "+mn[1]+"만원입니다.\n31평이하 최소 예치금액은 : "+mn[2]+"만원입니다.\n41평이하 최소 예치금액은 : "+mn[3]+"만원입니다.\n"  + name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±5점 이내의 주택을 추천합니다.",
+					"description": msg+ name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±5점 이내의 주택을 추천합니다.",
 					"thumbnail": {
 						  "imageUrl": "https://i.imgur.com/c5BP2be.jpg"
 					}
