@@ -1313,7 +1313,7 @@ apiRouter.post('/rec', function(req, res){
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"}]'+'}';
 	   */
 
-	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
+	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/eq6UFFz.jpg" },'+
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "당첨 예상 점수 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
 	    console.log(items)
             var it = JSON.parse(items);
@@ -1413,7 +1413,7 @@ apiRouter.post('/rec', function(req, res){
 				"title": "✔️ 분석 완료 ",						
 				"description": name+"님의 조건에 맞는 청약 주택을 찾았습니다.",
 				"thumbnail": {
-	  				"imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
+	  				"imageUrl": "https://i.imgur.com/n308Vha.jpg"
 				}
 	
 			}
