@@ -1319,16 +1319,25 @@ apiRouter.post('/rec', function(req, res){
             il.push(it);
 		}
 	
-	var mn;
+	var mn = [];
 	var ds;
 	if(district == 0){
-		mn = 300;
+		mn.push(300);
+		mn.push(600);
+		mn.push(1000);
+		mn.push(1500);
 		ds = "서울";
 	}else if(district == 1){
-		mn = 200;
+		mn.push(200);
+		mn.push(300);
+		mn.push(400);
+		mn.push(500);
 		ds = "경기";
 	}else if(district == 2){
-		mn = 250;
+		mn.push(250);
+		mn.push(400);
+		mn.push(700);
+		mn.push(1000);
 		ds = "인천";
 	}
 
@@ -1341,7 +1350,7 @@ apiRouter.post('/rec', function(req, res){
 				{
 					"basicCard": {
 					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
-					"description": ds+"지역의 최소 예치금액은 : "+mn+"만원입니다. \n" + name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.",
+					"description": ds+"지역의 최소 예치금액은 : "+mn[0]+"만원입니다.\n26평이하 최소 예치금액은 : "+mn[1]+"만원입니다.\n31평이하 최소 예치금액은 : "+mn[2]+"만원입니다.\n41평이하 최소 예치금액은 : "+mn[3]+"만원입니다.\n"  + name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±5점 이내의 주택을 추천합니다.",
 					"thumbnail": {
 						  "imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
 					}
