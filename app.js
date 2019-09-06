@@ -169,7 +169,7 @@ apiRouter.post('/welcome', function(req, res){
 					  {
 						"action": "block",
 						"label": "가점 다시 계산하기",
-						"blockId": "5d2be86bb617ea000117907f"
+						"blockId": "5d729f528192ac00011f79ca"
 						
 					  },
 					  {
