@@ -158,6 +158,11 @@ apiRouter.post('/welcome', function(req, res){
 					  "imageUrl": "https://i.imgur.com/X83c7Wl.jpg"
 					},
 					"buttons": [
+					{
+						"action": "block",
+						"label": "예치금 다시 입력하기",
+						"blockId": "5d721cddb617ea0001c19bb7"
+					},
 					  {
 						"action": "block",
 						"label": "가점 다시 계산하기",
@@ -674,7 +679,7 @@ apiRouter.post('/testbalance', function(req, res){
 	var bodyjson = req.body;
 	var params = bodyjson.action.params;
 	var testbalJson = JSON.parse(params.testbal);
-	var testbal = testbalJson.amount;
+	var testbal = testbalJson.amount * 10000;
 	
 	
 	var id = bodyjson.userRequest.user.id;	
@@ -1154,7 +1159,8 @@ apiRouter.post('/rec', function(req, res){
     console.log(result);
 	var name = result[0].name;
 	var score = result[0].score;	
-	
+	// 추가된거
+	var money = result[0].money;
 	
 	
 	var sql = "SELECT * FROM selection WHERE kakaoId = ?"
@@ -1163,8 +1169,52 @@ apiRouter.post('/rec', function(req, res){
 	var brand = result[0].brand;
 	var district = result[0].district;
 	
-	//scroe - 10 orderby 나중에 추가
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
+	var pyeong = 0;
+	// 서울
+	if(district == 0){
+		if(moneny < 300){
+			pyeong = 0;
+		}else if(money < 600){
+			pyeong = 26;
+		}else if(money < 1000){
+			pyeong = 31;
+		}else if(money < 1500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 경기
+	}else if(district == 1){
+		if(moneny < 200){
+			pyeong = 0;
+		}else if(money < 300){
+			pyeong = 26;
+		}else if(money < 400){
+			pyeong = 31;
+		}else if(money < 500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 인천
+	}else if(district == 2){
+		if(moneny < 250){
+			pyeong = 0;
+		}else if(money < 400){
+			pyeong = 26;
+		}else if(money < 700){
+			pyeong = 31;
+		}else if(money < 1000){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+	}
+	
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
+
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -1184,10 +1234,53 @@ apiRouter.post('/rec', function(req, res){
 	    console.log(items)
             var it = JSON.parse(items);
             il.push(it);
-        }
-
+		}
 	
-	var responseBody = {
+	var mn;
+	var ds;
+	if(district == 0){
+		mn = 300;
+		ds = "서울";
+	}else if(district == 1){
+		mn = 200;
+		ds = "경기";
+	}else if(district == 2){
+		mn = 250;
+		ds = "인천";
+	}
+
+	var responseBody;
+	if(result.length == 0){
+		 responseBody = {
+			"version": "2.0",
+			"template": {
+			  "outputs": [
+				{
+					"basicCard": {
+					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
+					"description": ds+"지역의 최소 예치금액은 : "+mn+"입니다. \n" + name+"님의 예치금액은 : "+money+"입니다. \n" + name+"님의 청약가점은 : "+score+"입니다.",
+					"thumbnail": {
+						  "imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
+					}
+		
+				}
+				}
+				  
+								
+			  ],
+			  "quickReplies": [
+				{
+					"label": "이전으로",
+					"action": "block",
+					"blockId": "5d29f4aeffa748000100365d"
+				}
+				
+	
+			]
+			}
+		  }	
+	}else{
+	 responseBody = {
 		"version": "2.0",
 		"template": {
 		  "outputs": [
@@ -1215,7 +1308,7 @@ apiRouter.post('/rec', function(req, res){
 		}
 	  }	
 		
-
+	}
 	
 
 	console.log(responseBody);
