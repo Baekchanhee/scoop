@@ -861,7 +861,7 @@ apiRouter.post('/visual', function(req, res){
 	var pyeong = 0;
 	// 서울
 	if(district == 0){
-		if(moneny < 300){
+		if(money < 300){
 			pyeong = 0;
 		}else if(money < 600){
 			pyeong = 26;
@@ -875,7 +875,7 @@ apiRouter.post('/visual', function(req, res){
 
 	// 경기
 	}else if(district == 1){
-		if(moneny < 200){
+		if(money < 200){
 			pyeong = 0;
 		}else if(money < 300){
 			pyeong = 26;
@@ -889,7 +889,7 @@ apiRouter.post('/visual', function(req, res){
 
 	// 인천
 	}else if(district == 2){
-		if(moneny < 250){
+		if(money < 250){
 			pyeong = 0;
 		}else if(money < 400){
 			pyeong = 26;
@@ -1016,7 +1016,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var pyeong = 0;
 	// 서울
 	if(district == 0){
-		if(moneny < 300){
+		if(money < 300){
 			pyeong = 0;
 		}else if(money < 600){
 			pyeong = 26;
@@ -1030,7 +1030,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 
 	// 경기
 	}else if(district == 1){
-		if(moneny < 200){
+		if(money < 200){
 			pyeong = 0;
 		}else if(money < 300){
 			pyeong = 26;
@@ -1044,7 +1044,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 
 	// 인천
 	}else if(district == 2){
-		if(moneny < 250){
+		if(money < 250){
 			pyeong = 0;
 		}else if(money < 400){
 			pyeong = 26;
@@ -1172,7 +1172,7 @@ apiRouter.post('/rec', function(req, res){
 	var pyeong = 0;
 	// 서울
 	if(district == 0){
-		if(moneny < 300){
+		if(money < 300){
 			pyeong = 0;
 		}else if(money < 600){
 			pyeong = 26;
@@ -1186,7 +1186,7 @@ apiRouter.post('/rec', function(req, res){
 
 	// 경기
 	}else if(district == 1){
-		if(moneny < 200){
+		if(money < 200){
 			pyeong = 0;
 		}else if(money < 300){
 			pyeong = 26;
@@ -1200,7 +1200,7 @@ apiRouter.post('/rec', function(req, res){
 
 	// 인천
 	}else if(district == 2){
-		if(moneny < 250){
+		if(money < 250){
 			pyeong = 0;
 		}else if(money < 400){
 			pyeong = 26;
