@@ -44,6 +44,9 @@
         <button id="authBtn">계좌인증</button>
         <button id="joinBtn">등록완료</button>
         </div>
+
+        <span id="msg" style="visibility: none">계좌인증 후 등록부탁드립니다.</span>
+        
         
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
@@ -113,8 +116,12 @@
             },
             success:function(data){
                 if(data == "-1"){
-                    console.log(data);
-                    window.open('popup.html', 'pop01', 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no');
+                    $("#msg").text("계좌인증 후 등록부탁드립니다.");
+                    $("#msg").css("visibility", "visible");
+                    
+                }else{
+                    $("#msg").text("계좌인증 완료되었습니다 뒤로 돌아가주세요!.");
+                    $("#msg").css("visibility", "visible");
                 }
                 //CloseWindow();
             }
