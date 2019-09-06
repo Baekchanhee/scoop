@@ -132,7 +132,7 @@ apiRouter.post('/welcome', function(req, res){
 						  },
 						  {
 							"action":  "block",
-							"label": "테스트용",
+							"label": "계좌없이 시작하기",
 							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						]
@@ -191,7 +191,8 @@ app.post('/join', function(req, res){
 	console.log(accessToken, useNum);
 	//var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	if(accessToken.length == 0){
-		console.log("계좌인증부터하시라!")	
+		console.log("계좌인증부터하시라!")
+		res.json(-1);	
 	}else{
     var sql = 'INSERT INTO user (kakaoId,  accessToken, useseqnum) VALUES (?,?,?);'
     connection.query(sql,[kakaoId, accessToken, useNum], function (error, results) {
@@ -264,7 +265,7 @@ apiRouter.post('/transaction', function(req, res){
 						  },
 						  {
 							"action":  "block",
-							"label": "테스트용",
+							"label": "계좌없이 시작하기",
 							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						
@@ -309,6 +310,7 @@ apiRouter.post('/transaction', function(req, res){
 			console.log("bank:"+bank);
 			var account = accessRequestResult.res_list[0].account_num_masked;
 			console.log("account:"+account);
+			
 			var sql = "UPDATE user SET name = '"+name+"', fintechnum = '"+finnum+"' where kakaoId = '"+id+"'";
             connection.query(sql, function(err, result){
 				console.log("update:"+result);
@@ -350,6 +352,11 @@ apiRouter.post('/transaction', function(req, res){
             var accessRequestResult = JSON.parse(body);
 			var balance = accessRequestResult.balance_amt;
 			//입금 count
+			var sql = "UPDATE user SET money = '"+balance+"'";
+            connection.query(sql, function(err, result){
+				console.log("update:"+result);
+				console.log(err);
+		})
 			console.log(balance);
 			var length = accessRequestResult.res_list.length;
 			console.log(length);
@@ -1049,7 +1056,7 @@ apiRouter.post('/rec', function(req, res){
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"}]'+'}';
 	   */
 
-	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/eq6UFFz.jpg" },'+
+	    var items = '{'+'"title": "'+result[i].aptname+'", "description": "-지역구:'+result[i].apt_district+'","thumbnail": { "imageUrl": "https://i.imgur.com/fOvCJjc.jpg" },'+
                 '"buttons": [{"action": "webLink", "label": "상세보기", "webLinkUrl": "'+result[i].apt_url+'"},{"action":  "block", "label": "당첨 예상 점수 보기", "blockId": "'+blockId[i]+'"}]'+'}';	
 	    console.log(items)
             var it = JSON.parse(items);
@@ -1066,7 +1073,7 @@ apiRouter.post('/rec', function(req, res){
 				"title": "✔️ 분석 완료 ",						
 				"description": name+"님의 조건에 맞는 청약 주택을 찾았습니다.",
 				"thumbnail": {
-	  				"imageUrl": "https://i.imgur.com/n308Vha.jpg"
+	  				"imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
 				}
 	
 			}
