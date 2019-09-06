@@ -209,7 +209,7 @@ apiRouter.post('/testenroll', function(req,res){
 	var bodyjson = req.body;
 	console.log(bodyjson);
 	var id = bodyjson.userRequest.user.id;
-	var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
+	var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','OOO','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	
 	
 	connection.query(sql, function(err, result){
@@ -220,7 +220,7 @@ apiRouter.post('/testenroll', function(req,res){
 	var responseBody = {
 		version: "2.0",
 		data: {
-			"name": "한지은"
+			"name": "OOO"
 		}
 		
 	};	
@@ -722,10 +722,12 @@ apiRouter.post('/homeinfo', function(req, res){
 
 	//지역구 의미 없음?
 	var district;
-	if(bot_area == "강남"){
+	if(bot_area == "서울"){
 		district = 0
-	}else if(bot_area == "강북"){
+	}else if(bot_area == "경기"){
 		district = 1
+	}else if(bot_area == "인천"){
+		district = 2;
 	}
 	
 	var sql = "SELECT * FROM selection WHERE kakaoId = ?";
@@ -813,14 +815,60 @@ apiRouter.post('/visual', function(req, res){
     console.log(result);
 	var name = result[0].name;
 	var score = result[0].score;	
+	// 추가된거
+	var money = result[0].money;
 
 	var sql = "SELECT * FROM selection WHERE kakaoId = ?"
 	var result = connectionsyn.query(sql, [id]);
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
+
+	var pyeong = 0;
+	// 서울
+	if(district == 0){
+		if(moneny < 300){
+			pyeong = 0;
+		}else if(money < 600){
+			pyeong = 26;
+		}else if(money < 1000){
+			pyeong = 31;
+		}else if(money < 1500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 경기
+	}else if(district == 1){
+		if(moneny < 200){
+			pyeong = 0;
+		}else if(money < 300){
+			pyeong = 26;
+		}else if(money < 400){
+			pyeong = 31;
+		}else if(money < 500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 인천
+	}else if(district == 2){
+		if(moneny < 250){
+			pyeong = 0;
+		}else if(money < 400){
+			pyeong = 26;
+		}else if(money < 700){
+			pyeong = 31;
+		}else if(money < 1000){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+	}
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -922,6 +970,8 @@ apiRouter.post('/cutlinescore', function(req, res){
     console.log(result);
 	var name = result[0].name;
 	var score = result[0].score;	
+	// 추가된거
+	var money = result[0].money;
 
 	var sql = "SELECT * FROM selection WHERE kakaoId = ?"
 	var result = connectionsyn.query(sql, [id]);
@@ -929,8 +979,52 @@ apiRouter.post('/cutlinescore', function(req, res){
 	var brand = result[0].brand;
 	var district = result[0].district;
 
+	var pyeong = 0;
+	// 서울
+	if(district == 0){
+		if(moneny < 300){
+			pyeong = 0;
+		}else if(money < 600){
+			pyeong = 26;
+		}else if(money < 1000){
+			pyeong = 31;
+		}else if(money < 1500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 경기
+	}else if(district == 1){
+		if(moneny < 200){
+			pyeong = 0;
+		}else if(money < 300){
+			pyeong = 26;
+		}else if(money < 400){
+			pyeong = 31;
+		}else if(money < 500){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+
+	// 인천
+	}else if(district == 2){
+		if(moneny < 250){
+			pyeong = 0;
+		}else if(money < 400){
+			pyeong = 26;
+		}else if(money < 700){
+			pyeong = 31;
+		}else if(money < 1000){
+			pyeong = 41;
+		}else{
+			pyeong = 1000;
+		}
+	}
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5);
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
+
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
