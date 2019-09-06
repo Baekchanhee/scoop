@@ -1330,7 +1330,7 @@ apiRouter.post('/rec', function(req, res){
 			mn = 600;
 		else if(pyung == 2)
 			mn = 1000;
-		else if(pyung == 3)
+		else if(pyung == 3 || pyung == 4)
 			mn = 1500;
 		ds = "서울";
 		
@@ -1341,7 +1341,7 @@ apiRouter.post('/rec', function(req, res){
 			mn = 300;
 		else if(pyung == 2)
 			mn = 400;
-		else if(pyung == 3)
+		else if(pyung == 3 || pyung == 4)
 			mn = 500;
 		ds = "경기";
 	}else if(district == 2){
@@ -1351,7 +1351,7 @@ apiRouter.post('/rec', function(req, res){
 			mn = 400;
 		else if(pyung == 2)
 			mn = 700;
-		else if(pyung == 3)
+		else if(pyung == 3 || pyung == 4)
 			mn = 1000;
 		ds = "인천";
 	}
@@ -1362,7 +1362,7 @@ apiRouter.post('/rec', function(req, res){
 		pp = "26평이하 최소"
 	}else if(pyung == 2){
 		pp = "31평이하 최소"
-	}else if(pyung == 3){
+	}else if(pyung == 3 || pyung == 4){
 		pp = "41평이하 최소"
 	}
 	msg = ds+"지역의 " + pp + " 예치금액은 : " + mn +"만원입니다.\n"
