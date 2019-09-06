@@ -117,7 +117,7 @@ apiRouter.post('/welcome', function(req, res){
 					  "basicCard": {
 											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
 						"thumbnail": {
-						  "imageUrl": "https://i.imgur.com/zDRSmHu.jpg"
+						  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
 						},
 						"buttons": [
 						  {
@@ -132,7 +132,7 @@ apiRouter.post('/welcome', function(req, res){
 						  },
 						  {
 							"action":  "block",
-							"label": "계좌없이 시작하기",
+							"label": "테스트용",
 							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						]
@@ -155,7 +155,7 @@ apiRouter.post('/welcome', function(req, res){
 					
 					"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다.😊🏠",
 					"thumbnail": {
-					  "imageUrl": "https://i.imgur.com/zDRSmHu.jpg"
+					  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
 					},
 					"buttons": [
 					  {
@@ -191,8 +191,7 @@ app.post('/join', function(req, res){
 	console.log(accessToken, useNum);
 	//var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	if(accessToken.length == 0){
-		console.log("계좌인증부터하시라!")
-		res.json(-1);	
+		console.log("계좌인증부터하시라!")	
 	}else{
     var sql = 'INSERT INTO user (kakaoId,  accessToken, useseqnum) VALUES (?,?,?);'
     connection.query(sql,[kakaoId, accessToken, useNum], function (error, results) {
@@ -250,7 +249,7 @@ apiRouter.post('/transaction', function(req, res){
 					"basicCard": {
 											"description": "안녕하세요! 카톡으로 간편하게 주택 청약 관련 서비스 이용을 도와드리는 청약봇입니다.\n\n 청약점수계산·당첨확률예상 등 청약 관련 서비스를 제공합니다. 현재 보유하고 계신 청약이 있으시다면 [계좌등록]을 눌러서 서비스를 이용해보세요.😊🏠",
 						"thumbnail": {
-						  "imageUrl": "https://i.imgur.com/zDRSmHu.jpg"
+						  "imageUrl": "https://i.imgur.com/OtlMaee.jpg"
 						},
 						"buttons": [
 						  {
@@ -265,7 +264,7 @@ apiRouter.post('/transaction', function(req, res){
 						  },
 						  {
 							"action":  "block",
-							"label": "계좌없이 시작하기",
+							"label": "테스트용",
 							"blockId": "5d30356eb617ea0001da2890"
 						  }
 						
@@ -351,11 +350,6 @@ apiRouter.post('/transaction', function(req, res){
             var accessRequestResult = JSON.parse(body);
 			var balance = accessRequestResult.balance_amt;
 			//입금 count
-			var sql = "UPDATE user SET money = '"+balance+"'";
-            connection.query(sql, function(err, result){
-				console.log("update:"+result);
-				console.log(err);
-		})
 			console.log(balance);
 			var length = accessRequestResult.res_list.length;
 			console.log(length);
@@ -1072,7 +1066,7 @@ apiRouter.post('/rec', function(req, res){
 				"title": "✔️ 분석 완료 ",						
 				"description": name+"님의 조건에 맞는 청약 주택을 찾았습니다.",
 				"thumbnail": {
-	  				"imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
+	  				"imageUrl": "https://i.imgur.com/n308Vha.jpg"
 				}
 	
 			}
