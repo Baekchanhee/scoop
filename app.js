@@ -1379,7 +1379,7 @@ apiRouter.post('/rec', function(req, res){
 					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
 					"description": msg+ name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.\n청약가점 ±5점 이내의 주택을 추천합니다.",
 					"thumbnail": {
-						  "imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
+						  "imageUrl": "https://i.imgur.com/qoGIFNZ.jpg"
 					}
 				}
 					
