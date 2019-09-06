@@ -711,24 +711,26 @@ apiRouter.post('/homeinfo', function(req, res){
 	
 	var bot_brandStr = params.bot_brand;
 	var bot_areaStr = params.bot_area;
-		
+	var bot_pyungsuStr = params.bot_pyungsu;	
 	
 	var bot_brand = bot_brandStr;
 	var bot_area = bot_areaStr;	
-
+	var bot_pyungsu = bot_pyungsuStr;
 	var id = bodyjson.userRequest.user.id;
 	
-	/*var mj; //면적
-	if(bot_space == "10평대"){
-		mj = 66.12;
-	}else if(bot_space == "20평대"){
-		mj = 99.17;
-	}else if(bot_space == "30평대"){
-		mj = 132.23;
-	}else if(bot_space == "40평대"){
-		mj = 165.29;
+	var pyung; //면적
+	if(bot_pyungsu == "20평 미만"){
+		pyung = 0;
+	}else if(bot_pyungsu == "20평대"){
+		pyung = 1;
+	}else if(bot_pyungsu == "30평대"){
+		pyung = 2;
+	}else if(bot_pyungsu == "40평대"){
+		pyung = 3;
+	}else if(bot_pyungsu == "50평 이상"){
+		pyung = 4;
 	}
-	console.log("면적:"+mj); */
+	console.log("pyung:"+pyung); 
 	//bot_price 는 그대로
 	// bot_price = bot_price / 10000;
 	var isbrand;
@@ -770,13 +772,13 @@ apiRouter.post('/homeinfo', function(req, res){
 	console.log("sql쿼리실행함??");
         console.log(result);
         if(result.length == 0){ // 정보 없음
-		isql = "INSERT INTO selection (kakaoId, brand, district) VALUES (?, ?, ?);"
+		isql = "INSERT INTO selection (kakaoId, brand, district, pyeong) VALUES (?, ?, ?, ?);"
 	}else{
-		isql = "UPDATE selection SET kakaoId = ?, brand = ?, district = ? where kakaoId = '"+id+"'"; 
+		isql = "UPDATE selection SET kakaoId = ?, brand = ?, district = ?, pyeong = ? where kakaoId = '"+id+"'"; 
 	}
 
 	console.log(isql);
-        connection.query(isql,[id, isbrand, district], function (error, results, fields) {
+        connection.query(isql,[id, isbrand, district, pyung], function (error, results, fields) {
         if(error){
             console.error(error);
         }
@@ -857,6 +859,7 @@ apiRouter.post('/visual', function(req, res){
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
+	var pyung = result[0].pyeong
 
 	var pyeong = 0;
 	// 서울
@@ -901,8 +904,34 @@ apiRouter.post('/visual', function(req, res){
 			pyeong = 1000;
 		}
 	}
+	var low_limit;
+	var high_limit;
+	if(pyung == 0){
+		low_limit = 0
+		high_limit = 20
+	}else if(pyung == 1){
+		low_limit = 20
+		high_limit = 30
+	}else if(pyung == 2){
+		low_limit = 30
+		high_limit = 40
+	}else if(pyung == 3){
+		low_limit = 40
+		high_limit = 50
+	}else if(pyung == 4){
+		low_limit = 50
+		high_limit = 1000
+	}
+	// pyeong 이 low_limt 과 high_limit 보다 낮음
+	if(pyeong <= low_limit && pyeong < high_limit ){
+		low_limit = 0;
+		high_limit = 0;
+	}else if(low_limit < pyeong && pyeong < high_limit ){
+		high_limit = pyeong;
+	}
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
+	
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -1012,6 +1041,7 @@ apiRouter.post('/cutlinescore', function(req, res){
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
+	var pyung = result[0].pyeong
 
 	var pyeong = 0;
 	// 서울
@@ -1057,8 +1087,34 @@ apiRouter.post('/cutlinescore', function(req, res){
 		}
 	}
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
-
+	var low_limit;
+	var high_limit;
+	if(pyung == 0){
+		low_limit = 0
+		high_limit = 20
+	}else if(pyung == 1){
+		low_limit = 20
+		high_limit = 30
+	}else if(pyung == 2){
+		low_limit = 30
+		high_limit = 40
+	}else if(pyung == 3){
+		low_limit = 40
+		high_limit = 50
+	}else if(pyung == 4){
+		low_limit = 50
+		high_limit = 1000
+	}
+	// pyeong 이 low_limt 과 high_limit 보다 낮음
+	if(pyeong <= low_limit && pyeong < high_limit ){
+		low_limit = 0;
+		high_limit = 0;
+	}else if(low_limit < pyeong && pyeong < high_limit ){
+		high_limit = pyeong;
+	}
+	
+	
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
 	console.log(result);
@@ -1168,7 +1224,8 @@ apiRouter.post('/rec', function(req, res){
 	console.log(result);
 	var brand = result[0].brand;
 	var district = result[0].district;
-	
+	var pyung = result[0].pyeong
+
 	var pyeong = 0;
 	// 서울
 	if(district == 0){
@@ -1212,8 +1269,34 @@ apiRouter.post('/rec', function(req, res){
 			pyeong = 1000;
 		}
 	}
+	var low_limit;
+	var high_limit;
+	if(pyung == 0){
+		low_limit = 0
+		high_limit = 20
+	}else if(pyung == 1){
+		low_limit = 20
+		high_limit = 30
+	}else if(pyung == 2){
+		low_limit = 30
+		high_limit = 40
+	}else if(pyung == 3){
+		low_limit = 40
+		high_limit = 50
+	}else if(pyung == 4){
+		low_limit = 50
+		high_limit = 1000
+	}
+	// pyeong 이 low_limt 과 high_limit 보다 낮음
+	if(pyeong <= low_limit && pyeong < high_limit ){
+		low_limit = 0;
+		high_limit = 0;
+	}else if(low_limit < pyeong && pyeong < high_limit ){
+		high_limit = pyeong;
+	}
 	
-	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space <="+pyeong;
+	
+	var sql = "SELECT * FROM apt WHERE brand = ? AND district = ? AND score <="+(parseInt(score)+5)+" AND score >="+(parseInt(score)-5)+" AND space >="+low_limit+" AND space <"+high_limit;
 
 	var result = connectionsyn.query(sql, [brand, district]);
 	console.log(sql);
