@@ -351,6 +351,11 @@ apiRouter.post('/transaction', function(req, res){
             var accessRequestResult = JSON.parse(body);
 			var balance = accessRequestResult.balance_amt;
 			//입금 count
+			var sql = "UPDATE user SET money = '"+balance+"'";
+            connection.query(sql, function(err, result){
+				console.log("update:"+result);
+				console.log(err);
+		})
 			console.log(balance);
 			var length = accessRequestResult.res_list.length;
 			console.log(length);
