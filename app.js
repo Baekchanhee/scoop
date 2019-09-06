@@ -1258,7 +1258,7 @@ apiRouter.post('/rec', function(req, res){
 				{
 					"basicCard": {
 					"title": "❌ 조건에 맞는 청약 주택이 없습니다. ",						
-					"description": ds+"지역의 최소 예치금액은 : "+mn+"입니다. \n" + name+"님의 예치금액은 : "+money+"입니다. \n" + name+"님의 청약가점은 : "+score+"입니다.",
+					"description": ds+"지역의 최소 예치금액은 : "+mn+"만원입니다. \n" + name+"님의 예치금액은 : "+money/10000+"만원입니다. \n" + name+"님의 청약가점은 : "+score+"점입니다.",
 					"thumbnail": {
 						  "imageUrl": "https://i.imgur.com/k6wp7dG.jpg"
 					}
