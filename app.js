@@ -667,6 +667,27 @@ apiRouter.post('/calculate', function(req, res){
 )
 })
 
+apiRouter.post('/testbalance', function(req, res){
+	console.log(req.body);
+	
+	console.log(req.body);
+	var bodyjson = req.body;
+	var params = bodyjson.action.params;
+	var testbalJson = JSON.parse(params.testbal);
+	var testbal = testbalJson.amount;
+	
+	
+	var id = bodyjson.userRequest.user.id;	
+	
+	//db query score update
+	var sql = "UPDATE user SET money = "+testbal+" where kakaoId = '"+id+"'";
+	connection.query(sql, function(err, result){
+        	console.log(result);
+		console.log(err);
+	}
+)
+})
+
 apiRouter.post('/homeinfo', function(req, res){
 	console.log(req.body);
 
