@@ -191,7 +191,8 @@ app.post('/join', function(req, res){
 	console.log(accessToken, useNum);
 	//var sql = "INSERT INTO user (kakaoId, name, accessToken, useseqnum) VALUES ('"+id+"','한지은','6f806275-5e56-4a66-9bf2-10129ad56752','1100035222')";
 	if(accessToken.length == 0){
-		console.log("계좌인증부터하시라!")	
+		console.log("계좌인증부터하시라!")
+		res.json(-1);	
 	}else{
     var sql = 'INSERT INTO user (kakaoId,  accessToken, useseqnum) VALUES (?,?,?);'
     connection.query(sql,[kakaoId, accessToken, useNum], function (error, results) {
